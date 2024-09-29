@@ -48,6 +48,17 @@
             {
                 Console.WriteLine($"{X1},{Y1} is NOT in figure");
             }
+
+            Console.WriteLine("Task 3 ------------------");
+
+            float a = 1000;
+            double b = 0.0001;
+
+            double chis = Math.Pow(a + b, 3) - (Math.Pow(a, 3) + 3 * a * Math.Pow(b, 2));
+            double znam = 3 * b * Math.Pow(a, 2) + Math.Pow(b, 3);
+            double rezBigV = chis / znam;
+            Console.WriteLine($"Result: {rezBigV}");
+
         }
     }
 }
