@@ -1,201 +1,240 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class SetCalculator
 {
+    // Словарь для хранения множеств по их именам
+    static Dictionary<string, HashSet<int>> sets = new Dictionary<string, HashSet<int>>();
+
     static void Main(string[] args)
     {
-        Dictionary<string, HashSet<int>> sets = new Dictionary<string, HashSet<int>>();
-        string command;
+        bool exit = false;
 
-        Console.WriteLine("Set Calculator. Type 'help' to see available commands.");
-
-        do
+        while (!exit)
         {
-            Console.Write("\nEnter command: ");
-            command = Console.ReadLine();
-            string[] parts = command.Split(' ');
+            Console.WriteLine("\nМеню:");
+            Console.WriteLine("1. Создать множество");
+            Console.WriteLine("2. Удалить множество");
+            Console.WriteLine("3. Составить выражение");
+            Console.WriteLine("4. Вывести множество");
+            Console.WriteLine("5. Выход");
+            Console.Write("Выберите команду: ");
 
-            switch (parts[0].ToLower())
+            string choice = Console.ReadLine();
+            switch (choice)
             {
-                case "create":
-                    CreateSet(sets, parts);
+                case "1":
+                    CreateSet();
                     break;
-                case "union":
-                    PerformOperation(sets, parts, Union);
+                case "2":
+                    DeleteSet();
                     break;
-                case "intersection":
-                    PerformOperation(sets, parts, Intersection);
+                case "3":
+                    EvaluateExpression();
                     break;
-                case "difference":
-                    PerformOperation(sets, parts, Difference);
+                case "4":
+                    PrintSet();
                     break;
-                case "symmetricdifference":
-                    PerformOperation(sets, parts, SymmetricDifference);
-                    break;
-                case "print":
-                    PrintSet(sets, parts);
-                    break;
-                case "help":
-                    PrintHelp();
-                    break;
-                case "exit":
-                    Console.WriteLine("Exiting...");
+                case "5":
+                    exit = true;
                     break;
                 default:
-                    Console.WriteLine("Unknown command. Type 'help' for the list of commands.");
+                    Console.WriteLine("Неверная команда.");
                     break;
             }
-        } while (command.ToLower() != "exit");
+        }
     }
 
-    static void CreateSet(Dictionary<string, HashSet<int>> sets, string[] parts)
+    // Создание множества
+    static void CreateSet()
     {
-        if (parts.Length < 3)
-        {
-            Console.WriteLine("Usage: create <setName> <elements>");
-            return;
-        }
+        Console.Write("Введите имя множества: ");
+        string setName = Console.ReadLine();
 
-        string setName = parts[1];
         if (sets.ContainsKey(setName))
         {
-            Console.WriteLine($"Set {setName} already exists.");
+            Console.WriteLine($"Множество с именем '{setName}' уже существует.");
             return;
         }
 
-        string[] elements = parts[2].Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        HashSet<int> set = new HashSet<int>();
-
-        foreach (var element in elements)
+        Console.Write("Введите элементы множества через запятую: ");
+        string elementsInput = Console.ReadLine();
+        try
         {
-            if (int.TryParse(element, out int number))
+            HashSet<int> set = new HashSet<int>(elementsInput.Split(',').Select(int.Parse));
+            sets[setName] = set;
+            Console.WriteLine($"Множество '{setName}' создано.");
+        }
+        catch
+        {
+            Console.WriteLine("Ошибка ввода. Убедитесь, что вы ввели целые числа.");
+        }
+    }
+
+    // Удаление множества
+    static void DeleteSet()
+    {
+        Console.Write("Введите имя множества для удаления: ");
+        string setName = Console.ReadLine();
+
+        if (sets.Remove(setName))
+        {
+            Console.WriteLine($"Множество '{setName}' удалено.");
+        }
+        else
+        {
+            Console.WriteLine($"Множество с именем '{setName}' не найдено.");
+        }
+    }
+
+    // Составление выражения
+    static void EvaluateExpression()
+    {
+        Console.Write("Введите выражение (пример: (A ∪ B) ∩ C): ");
+        string expression = Console.ReadLine();
+
+        try
+        {
+            // Заменяем символы операций для удобства
+            expression = expression.Replace("∪", "|")  // Объединение
+                                   .Replace("∩", "&")  // Пересечение
+                                   .Replace("∆", "^")  // Симметрическая разность
+                                   .Replace("-", "-"); // Разность
+
+            HashSet<int> result = ParseExpression(expression);
+            if (result != null)
             {
-                set.Add(number);
+                Console.WriteLine($"Результат: {{ {string.Join(", ", result)} }}");
             }
             else
             {
-                Console.WriteLine($"Invalid element: {element}");
+                Console.WriteLine("Ошибка в выражении.");
             }
         }
-
-        sets[setName] = set;
-        Console.WriteLine($"Set {setName} created with elements: {{ {string.Join(", ", set)} }}");
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка: {ex.Message}");
+        }
     }
 
-    static void PerformOperation(Dictionary<string, HashSet<int>> sets, string[] parts, Func<HashSet<int>, HashSet<int>, HashSet<int>> operation)
+    // Вывод определенного множества
+    static void PrintSet()
     {
-        if (parts.Length != 4)
+        Console.Write("Введите имя множества для вывода: ");
+        string setName = Console.ReadLine();
+
+        if (sets.ContainsKey(setName))
         {
-            Console.WriteLine("Usage: <operation> <set1> <set2> <resultSet>");
-            return;
+            HashSet<int> set = sets[setName];
+            Console.WriteLine($"Множество '{setName}': {{ {string.Join(", ", set)} }}");
         }
-
-        string set1 = parts[1];
-        string set2 = parts[2];
-        string resultSet = parts[3];
-
-        if (!sets.ContainsKey(set1) || !sets.ContainsKey(set2))
+        else
         {
-            Console.WriteLine("One or both sets do not exist.");
-            return;
+            Console.WriteLine($"Множество с именем '{setName}' не найдено.");
         }
-
-        HashSet<int> result = operation(sets[set1], sets[set2]);
-        sets[resultSet] = result;
-        Console.WriteLine($"Result set {resultSet} created.");
     }
 
-    static HashSet<int> Union(HashSet<int> set1, HashSet<int> set2)
+    // Парсинг выражения и выполнение операций
+    static HashSet<int> ParseExpression(string expression)
     {
-        HashSet<int> result = new HashSet<int>(set1);
+        Stack<HashSet<int>> stack = new Stack<HashSet<int>>();
+        Stack<char> operators = new Stack<char>();
 
-        
-        foreach (int element in set2)
+        for (int i = 0; i < expression.Length; i++)
         {
-            result.Add(element);
-        }
+            char c = expression[i];
 
-        return result;
-    }
+            if (char.IsWhiteSpace(c)) continue;
 
-    static HashSet<int> Intersection(HashSet<int> set1, HashSet<int> set2)
-    {
-        HashSet<int> result = new HashSet<int>();
-       
-        foreach (int element in set1)
-        {
-            if (set2.Contains(element))
+            if (c == '(')
             {
-                result.Add(element);
+                operators.Push(c);
             }
-        }
-
-        return result;
-    }
-
-    static HashSet<int> Difference(HashSet<int> set1, HashSet<int> set2)
-    {
-        HashSet<int> result = new HashSet<int>(set1);
-       
-        foreach (int element in set2)
-        {
-            result.Remove(element);
-        }
-
-        return result;
-    }
-
-    static HashSet<int> SymmetricDifference(HashSet<int> set1, HashSet<int> set2)
-    {
-        HashSet<int> result = new HashSet<int>();
-
-        foreach (int element in set1)
-        {
-            if (!set2.Contains(element))
+            else if (c == ')')
             {
-                result.Add(element);
+                while (operators.Count > 0 && operators.Peek() != '(')
+                {
+                    ApplyOperator(stack, operators.Pop());
+                }
+                operators.Pop(); // Удаляем '(' из стека
             }
-        }
-
-        foreach (int element in set2)
-        {
-            if (!set1.Contains(element))
+            else if (IsOperator(c))
             {
-                result.Add(element);
+                while (operators.Count > 0 && Priority(operators.Peek()) >= Priority(c))
+                {
+                    ApplyOperator(stack, operators.Pop());
+                }
+                operators.Push(c);
+            }
+            else if (char.IsLetter(c))
+            {
+                string setName = c.ToString();
+                if (sets.ContainsKey(setName))
+                {
+                    stack.Push(new HashSet<int>(sets[setName]));
+                }
+                else
+                {
+                    Console.WriteLine($"Множество '{setName}' не найдено.");
+                    return null;
+                }
             }
         }
 
-        return result;
-    }
-
-    static void PrintSet(Dictionary<string, HashSet<int>> sets, string[] parts)
-    {
-        if (parts.Length != 2)
+        while (operators.Count > 0)
         {
-            Console.WriteLine("Usage: print <setName>");
-            return;
+            ApplyOperator(stack, operators.Pop());
         }
 
-        string setName = parts[1];
-        if (!sets.ContainsKey(setName))
-        {
-            Console.WriteLine($"Set {setName} does not exist.");
-            return;
-        }
-
-        Console.WriteLine($"{setName}: {{ {string.Join(", ", sets[setName])} }}");
+        return stack.Count > 0 ? stack.Pop() : null;
     }
 
-    static void PrintHelp()
+    // Проверка на оператор
+    static bool IsOperator(char c)
     {
-        Console.WriteLine("Available commands:");
-        Console.WriteLine("create <setName> <elements> - Create a new set with the specified name and elements.");
-        Console.WriteLine("union <set1> <set2> <resultSet> - Perform union of two sets and store in resultSet.");
-        Console.WriteLine("intersection <set1> <set2> <resultSet> - Perform intersection of two sets and store in resultSet.");
-        Console.WriteLine("difference <set1> <set2> <resultSet> - Perform difference of two sets and store in resultSet.");
-        Console.WriteLine("symmetricdifference <set1> <set2> <resultSet> - Perform symmetric difference of two sets and store in resultSet.");
-        Console.WriteLine("print <setName> - Print the contents of a set.");
-        Console.WriteLine("exit - Exit the program.");
+        return c == '|' || c == '&' || c == '-' || c == '^';
+    }
+
+    // Приоритет операций
+    static int Priority(char op)
+    {
+        if (op == '|') return 1;  // Объединение
+        if (op == '&') return 2;  // Пересечение
+        if (op == '^') return 3;  // Симметрическая разность
+        if (op == '-') return 3;  // Разность
+        return 0;
+    }
+
+    // Применение оператора к верхним элементам стека
+    static void ApplyOperator(Stack<HashSet<int>> stack, char op)
+    {
+        var set2 = stack.Pop();
+        var set1 = stack.Pop();
+        HashSet<int> result;
+
+        switch (op)
+        {
+            case '|':
+                result = new HashSet<int>(set1);
+                result.UnionWith(set2);
+                break;
+            case '&':
+                result = new HashSet<int>(set1);
+                result.IntersectWith(set2);
+                break;
+            case '-':
+                result = new HashSet<int>(set1);
+                result.ExceptWith(set2);
+                break;
+            case '^':
+                result = new HashSet<int>(set1);
+                result.SymmetricExceptWith(set2);
+                break;
+            default:
+                throw new ArgumentException("Неизвестный оператор");
+        }
+
+        stack.Push(result);
     }
 }
