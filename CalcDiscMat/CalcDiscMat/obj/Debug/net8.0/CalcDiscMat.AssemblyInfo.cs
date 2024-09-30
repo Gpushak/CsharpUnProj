@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CalcDiscMat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bba9757cc09abd82fe724dab6e511c040b9c37da")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cc74a8086d1e7ac18d9aec94d5e1ed90b86a55a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("CalcDiscMat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CalcDiscMat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

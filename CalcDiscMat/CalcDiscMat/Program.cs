@@ -216,20 +216,16 @@ class SetCalculator
         switch (op)
         {
             case '|':
-                result = new HashSet<int>(set1);
-                result.UnionWith(set2);
+                result = Union(set1, set2);
                 break;
             case '&':
-                result = new HashSet<int>(set1);
-                result.IntersectWith(set2);
+                result = Intersection(set1, set2);
                 break;
             case '-':
-                result = new HashSet<int>(set1);
-                result.ExceptWith(set2);
+                result = Difference(set1, set2);
                 break;
             case '^':
-                result = new HashSet<int>(set1);
-                result.SymmetricExceptWith(set2);
+                result = SymmetricDifference(set1, set2);
                 break;
             default:
                 throw new ArgumentException("Неизвестный оператор");
@@ -237,4 +233,59 @@ class SetCalculator
 
         stack.Push(result);
     }
+
+    // Реализация операций вручную
+    static HashSet<int> Union(HashSet<int> set1, HashSet<int> set2)
+    {
+        HashSet<int> result = new HashSet<int>(set1);
+        foreach (var item in set2)
+        {
+            result.Add(item);
+        }
+        return result;
+    }
+
+    static HashSet<int> Intersection(HashSet<int> set1, HashSet<int> set2)
+    {
+        HashSet<int> result = new HashSet<int>();
+        foreach (var item in set1)
+        {
+            if (set2.Contains(item))
+            {
+                result.Add(item);
+            }
+        }
+        return result;
+    }
+
+    static HashSet<int> Difference(HashSet<int> set1, HashSet<int> set2)
+    {
+        HashSet<int> result = new HashSet<int>(set1);
+        foreach (var item in set2)
+        {
+            result.Remove(item);
+        }
+        return result;
+    }
+
+    static HashSet<int> SymmetricDifference(HashSet<int> set1, HashSet<int> set2)
+    {
+        HashSet<int> result = new HashSet<int>();
+        foreach (var item in set1)
+        {
+            if (!set2.Contains(item))
+            {
+                result.Add(item);
+            }
+        }
+        foreach (var item in set2)
+        {
+            if (!set1.Contains(item))
+            {
+                result.Add(item);
+            }
+        }
+        return result;
+    }
 }
+
