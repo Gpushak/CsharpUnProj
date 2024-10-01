@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 class SetCalculator
 {
     // Словарь для хранения множеств по их именам
