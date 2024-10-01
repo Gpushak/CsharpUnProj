@@ -15,10 +15,9 @@ class SetCalculator
             Console.WriteLine("1. Создать множество");
             Console.WriteLine("2. Удалить множество");
             Console.WriteLine("3. Составить выражение");
-            Console.WriteLine("4. Вывести множество");
+            Console.WriteLine("4. Вывести все множества");  // Изменено название команды
             Console.WriteLine("5. Выход");
             Console.Write("Выберите команду: ");
-
             string choice = Console.ReadLine();
             switch (choice)
             {
@@ -32,7 +31,7 @@ class SetCalculator
                     EvaluateExpression();
                     break;
                 case "4":
-                    PrintSet();
+                    PrintAllSets();  
                     break;
                 case "5":
                     exit = true;
@@ -44,8 +43,35 @@ class SetCalculator
         }
     }
 
+
     // Создание множества
     static void CreateSet()
+    {
+        Console.WriteLine("Выберите способ создания множества:");
+        Console.WriteLine("1. Ввести элементы вручную");
+        Console.WriteLine("2. Создать множество через диапазон");
+        Console.WriteLine("3. Создать множество через кратность");
+        string option = Console.ReadLine();
+
+        switch (option)
+        {
+            case "1":
+                CreateSetManually();
+                break;
+            case "2":
+                CreateSetByRange();
+                break;
+            case "3":
+                CreateSetByMultiplicity();
+                break;
+            default:
+                Console.WriteLine("Неверная команда.");
+                break;
+        }
+    }
+
+    // Создание множества вручную
+    static void CreateSetManually()
     {
         Console.Write("Введите имя множества: ");
         string setName = Console.ReadLine();
@@ -69,6 +95,70 @@ class SetCalculator
             Console.WriteLine("Ошибка ввода. Убедитесь, что вы ввели целые числа.");
         }
     }
+
+    // Создание множества через диапазон
+    static void CreateSetByRange()
+    {
+        Console.Write("Введите имя множества: ");
+        string setName = Console.ReadLine();
+
+        if (sets.ContainsKey(setName))
+        {
+            Console.WriteLine($"Множество с именем '{setName}' уже существует.");
+            return;
+        }
+
+        Console.Write("Введите начало диапазона: ");
+        int start = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите конец диапазона: ");
+        int end = int.Parse(Console.ReadLine());
+
+        if (start > end)
+        {
+            Console.WriteLine("Начало диапазона не может быть больше конца.");
+            return;
+        }
+
+        HashSet<int> set = new HashSet<int>(Enumerable.Range(start, end - start + 1));
+        sets[setName] = set;
+        Console.WriteLine($"Множество '{setName}' создано через диапазон от {start} до {end}.");
+    }
+
+    // Создание множества через кратность
+    static void CreateSetByMultiplicity()
+    {
+        Console.Write("Введите имя множества: ");
+        string setName = Console.ReadLine();
+
+        if (sets.ContainsKey(setName))
+        {
+            Console.WriteLine($"Множество с именем '{setName}' уже существует.");
+            return;
+        }
+
+        Console.Write("Введите число, кратное которому будут элементы: ");
+        int multiple = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите минимум для создания элементов: ");
+        int min = int.Parse(Console.ReadLine());
+
+        Console.Write("Введите максимум для создания элементов: ");
+        int max = int.Parse(Console.ReadLine());
+
+        if (multiple <= 0 || min > max)
+        {
+            Console.WriteLine("Минимум должен быть меньше или равен максимуму.");
+            return;
+        }
+
+        // Создание множества с элементами, кратными multiple, в пределах от min до max
+        HashSet<int> set = new HashSet<int>(Enumerable.Range(min, max - min + 1).Where(x => x % multiple == 0));
+        sets[setName] = set;
+        Console.WriteLine($"Множество '{setName}' создано через кратность числа {multiple} в диапазоне от {min} до {max}.");
+    }
+
+
 
     // Удаление множества
     static void DeleteSet()
@@ -130,6 +220,22 @@ class SetCalculator
         else
         {
             Console.WriteLine($"Множество с именем '{setName}' не найдено.");
+        }
+    }
+
+    // Вывод всех множеств
+    static void PrintAllSets()
+    {
+        if (sets.Count == 0)
+        {
+            Console.WriteLine("Нет сохранённых множеств.");
+            return;
+        }
+
+        Console.WriteLine("Список всех множеств:");
+        foreach (var setEntry in sets)
+        {
+            Console.WriteLine($"Множество '{setEntry.Key}': {{ {string.Join(", ", setEntry.Value)} }}");
         }
     }
 
