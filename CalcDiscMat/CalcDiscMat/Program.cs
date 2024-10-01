@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 class SetCalculator
 {
@@ -91,16 +90,16 @@ class SetCalculator
     // Составление выражения
     static void EvaluateExpression()
     {
-        Console.Write("Введите выражение (пример: (A ∪ B) ∩ C): ");
+        Console.WriteLine("Введите выражение (пример: (A + B) & C ; где объедиение '+', пересечение '&', разность '-', сим. разность '^'): ");
         string expression = Console.ReadLine();
 
         try
         {
             // Заменяем символы операций для удобства
-            expression = expression.Replace("∪", "|")  // Объединение
+            expression = expression.Replace("∪", "+")  // Объединение
                                    .Replace("∩", "&")  // Пересечение
                                    .Replace("∆", "^")  // Симметрическая разность
-                                   .Replace("-", "-"); // Разность
+                                   .Replace("/", "-"); // Разность
 
             HashSet<int> result = ParseExpression(expression);
             if (result != null)
@@ -118,7 +117,7 @@ class SetCalculator
         }
     }
 
-    // Вывод определенного множества
+    // Вывод множества
     static void PrintSet()
     {
         Console.Write("Введите имя множества для вывода: ");
@@ -193,16 +192,16 @@ class SetCalculator
     // Проверка на оператор
     static bool IsOperator(char c)
     {
-        return c == '|' || c == '&' || c == '-' || c == '^';
+        return c == '+' || c == '&' || c == '-' || c == '^';
     }
 
     // Приоритет операций
     static int Priority(char op)
     {
-        if (op == '|') return 1;  // Объединение
-        if (op == '&') return 2;  // Пересечение
-        if (op == '^') return 3;  // Симметрическая разность
-        if (op == '-') return 3;  // Разность
+        if (op == '+') return 1;  
+        if (op == '&') return 2;  
+        if (op == '^') return 3;  
+        if (op == '-') return 3;  
         return 0;
     }
 
@@ -215,7 +214,7 @@ class SetCalculator
 
         switch (op)
         {
-            case '|':
+            case '+':
                 result = Union(set1, set2);
                 break;
             case '&':
@@ -234,7 +233,7 @@ class SetCalculator
         stack.Push(result);
     }
 
-    // Реализация операций вручную
+    // Реализация операций 
     static HashSet<int> Union(HashSet<int> set1, HashSet<int> set2)
     {
         HashSet<int> result = new HashSet<int>(set1);
