@@ -1,21 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 class SetCalculator
 {
     // Словарь для хранения множеств по их именам
     static Dictionary<string, HashSet<int>> sets = new Dictionary<string, HashSet<int>>();
+    static HashSet<int> universe = new HashSet<int>(Enumerable.Range(-30, 61)); // Инициализация универсума
 
     static void Main(string[] args)
     {
-        bool exit = false;
+        
 
+        bool exit = false;
         while (!exit)
         {
             Console.WriteLine("\nМеню:");
             Console.WriteLine("1. Создать множество");
             Console.WriteLine("2. Удалить множество");
             Console.WriteLine("3. Составить выражение");
-            Console.WriteLine("4. Вывести все множества");  // Изменено название команды
+            Console.WriteLine("4. Вывести все множества");
             Console.WriteLine("5. Выход");
             Console.Write("Выберите команду: ");
             string choice = Console.ReadLine();
@@ -31,7 +35,7 @@ class SetCalculator
                     EvaluateExpression();
                     break;
                 case "4":
-                    PrintAllSets();  
+                    PrintAllSets();
                     break;
                 case "5":
                     exit = true;
@@ -42,7 +46,24 @@ class SetCalculator
             }
         }
     }
+    // Задание юниверсума
+    static void SetUniverse()
+    {
+        Console.Write("Введите начало диапазона для юниверсума: ");
+        int start = int.Parse(Console.ReadLine());
 
+        Console.Write("Введите конец диапазона для юниверсума: ");
+        int end = int.Parse(Console.ReadLine());
+
+        if (start > end)
+        {
+            Console.WriteLine("Начало диапазона не может быть больше конца.");
+            return;
+        }
+
+        universe = new HashSet<int>(Enumerable.Range(start, end - start + 1));
+        Console.WriteLine($"Юниверсум (U) установлен с диапазоном от {start} до {end}.");
+    }
 
     // Создание множества
     static void CreateSet()
@@ -152,13 +173,10 @@ class SetCalculator
             return;
         }
 
-        // Создание множества с элементами, кратными multiple, в пределах от min до max
         HashSet<int> set = new HashSet<int>(Enumerable.Range(min, max - min + 1).Where(x => x % multiple == 0));
         sets[setName] = set;
         Console.WriteLine($"Множество '{setName}' создано через кратность числа {multiple} в диапазоне от {min} до {max}.");
     }
-
-
 
     // Удаление множества
     static void DeleteSet()
@@ -179,16 +197,15 @@ class SetCalculator
     // Составление выражения
     static void EvaluateExpression()
     {
-        Console.WriteLine("Введите выражение (пример: (A + B) & C ; где объедиение '+', пересечение '&', разность '-', сим. разность '^'): ");
+        Console.WriteLine("Введите выражение (пример: (A + B) & C ; \nгде объедиение '+', пересечение '&', разность '-', сим. разность '^', дополнение '~'): ");
         string expression = Console.ReadLine();
 
         try
         {
-            // Заменяем символы операций для удобства
-            expression = expression.Replace("∪", "+")  // Объединение
-                                   .Replace("∩", "&")  // Пересечение
-                                   .Replace("∆", "^")  // Симметрическая разность
-                                   .Replace("/", "-"); // Разность
+            expression = expression.Replace("∪", "+")
+                                   .Replace("∩", "&")
+                                   .Replace("∆", "^")
+                                   .Replace("/", "-");
 
             HashSet<int> result = ParseExpression(expression);
             if (result != null)
@@ -226,6 +243,11 @@ class SetCalculator
     // Вывод всех множеств
     static void PrintAllSets()
     {
+        if (universe != null)
+        {
+            Console.WriteLine($"Юниверсум (U): {{ {string.Join(", ", universe)} }}");
+        }
+
         if (sets.Count == 0)
         {
             Console.WriteLine("Нет сохранённых множеств.");
@@ -261,7 +283,7 @@ class SetCalculator
                 {
                     ApplyOperator(stack, operators.Pop());
                 }
-                operators.Pop(); // Удаляем '(' из стека
+                operators.Pop(); 
             }
             else if (IsOperator(c))
             {
@@ -271,10 +293,18 @@ class SetCalculator
                 }
                 operators.Push(c);
             }
+            else if (c == '~') 
+            {
+                operators.Push(c);
+            }
             else if (char.IsLetter(c))
             {
                 string setName = c.ToString();
-                if (sets.ContainsKey(setName))
+                if (setName == "U")
+                {
+                    stack.Push(new HashSet<int>(universe));
+                }
+                else if (sets.ContainsKey(setName))
                 {
                     stack.Push(new HashSet<int>(sets[setName]));
                 }
@@ -297,46 +327,57 @@ class SetCalculator
     // Проверка на оператор
     static bool IsOperator(char c)
     {
-        return c == '+' || c == '&' || c == '-' || c == '^';
+        return c == '+' || c == '&' || c == '-' || c == '^' || c == '~'; 
     }
 
     // Приоритет операций
     static int Priority(char op)
     {
-        if (op == '+') return 1;  
-        if (op == '&') return 2;  
-        if (op == '^') return 3;  
-        if (op == '-') return 3;  
+        if (op == '~') return 4;  
+        if (op == '+') return 1;
+        if (op == '&') return 2;
+        if (op == '^') return 3;
+        if (op == '-') return 3;
         return 0;
     }
 
     // Применение оператора к верхним элементам стека
     static void ApplyOperator(Stack<HashSet<int>> stack, char op)
     {
-        var set2 = stack.Pop();
-        var set1 = stack.Pop();
         HashSet<int> result;
 
-        switch (op)
+        if (op == '~') 
         {
-            case '+':
-                result = Union(set1, set2);
-                break;
-            case '&':
-                result = Intersection(set1, set2);
-                break;
-            case '-':
-                result = Difference(set1, set2);
-                break;
-            case '^':
-                result = SymmetricDifference(set1, set2);
-                break;
-            default:
-                throw new ArgumentException("Неизвестный оператор");
+            var set = stack.Pop();
+            result = Complement(set);
+        }
+        else
+        {
+            var set2 = stack.Pop();
+            var set1 = stack.Pop();
+
+            switch (op)
+            {
+                case '+':
+                    result = Union(set1, set2);
+                    break;
+                case '&':
+                    result = Intersection(set1, set2);
+                    break;
+                case '-':
+                    result = Difference(set1, set2);
+                    break;
+                case '^':
+                    result = SymmetricDifference(set1, set2);
+                    break;
+                default:
+                    throw new ArgumentException("Неизвестный оператор");
+            }
         }
 
         stack.Push(result);
     }
+
 
     // Реализация операций 
     static HashSet<int> Union(HashSet<int> set1, HashSet<int> set2)
@@ -391,5 +432,13 @@ class SetCalculator
         }
         return result;
     }
+    static HashSet<int> Complement(HashSet<int> set)
+    {
+        HashSet<int> result = new HashSet<int>(universe);
+        foreach (var item in set)
+        {
+            result.Remove(item);
+        }
+        return result;
+    }
 }
-
