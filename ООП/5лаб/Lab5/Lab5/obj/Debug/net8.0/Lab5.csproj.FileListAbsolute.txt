@@ -1,0 +1,15 @@
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\bin\Debug\net8.0\Lab5.exe
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\bin\Debug\net8.0\Lab5.deps.json
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\bin\Debug\net8.0\Lab5.runtimeconfig.json
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\bin\Debug\net8.0\Lab5.dll
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\bin\Debug\net8.0\Lab5.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.AssemblyInfoInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.AssemblyInfo.cs
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.csproj.CoreCompileInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.sourcelink.json
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.dll
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\refint\Lab5.dll
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\Lab5.genruntimeconfig.cache
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\5лаб\Lab5\Lab5\obj\Debug\net8.0\ref\Lab5.dll
