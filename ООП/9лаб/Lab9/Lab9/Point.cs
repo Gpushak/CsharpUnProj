@@ -2,12 +2,11 @@
 
 public class Point
 {
-    // Закрытые поля для координат точки
-    private double x;
-    private double y;
+    double x;
+    double y;
 
-    // Статическая переменная для подсчета количества созданных объектов
-    private static int instanceCount = 0;
+    // переменная для подсчета количества созданных объектов
+    static int instanceCount = 0;
 
     // Свойства для доступа к координатам
     public double X

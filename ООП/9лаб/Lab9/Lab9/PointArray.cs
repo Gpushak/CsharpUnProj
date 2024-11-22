@@ -2,8 +2,8 @@
 
 public class PointArray
 {
-    private Point[] arr; // одномерный массив элементов типа Point
-    private static int instanceCount = 0; // статическая переменная для подсчета объектов
+    Point[] arr; 
+    static int instanceCount = 0; 
 
     // Конструктор без параметров
     public PointArray()
@@ -20,25 +20,6 @@ public class PointArray
         for (int i = 0; i < size; i++)
         {
             arr[i] = new Point(rand.NextDouble() * 100, rand.NextDouble() * 100);
-        }
-        instanceCount++;
-    }
-
-    // Конструктор с параметром для заполнения массива пользователем
-    public PointArray(int size, bool userInput)
-    {
-        arr = new Point[size];
-        if (userInput)
-        {
-            for (int i = 0; i < size; i++)
-            {
-                Console.WriteLine($"Введите координаты для точки {i + 1}:");
-                Console.Write("X: ");
-                double x = double.Parse(Console.ReadLine());
-                Console.Write("Y: ");
-                double y = double.Parse(Console.ReadLine());
-                arr[i] = new Point(x, y);
-            }
         }
         instanceCount++;
     }
