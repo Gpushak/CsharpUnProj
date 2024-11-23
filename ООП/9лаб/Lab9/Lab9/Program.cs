@@ -4,7 +4,7 @@ class Program
 {
     static void Main()
     {
-        // ------------ ЧАСТЬ 1: Демонстрация класса Point -----------------
+        // ------------ ЧАСТЬ 1: Демонстрация Point ---------------------
         Console.WriteLine("Демонстрация класса Point:");
 
         Point point1 = new Point(3.0, 4.0);
@@ -19,7 +19,7 @@ class Program
 
         Console.WriteLine($"\nКоличество созданных объектов Point: {Point.InstanceCount}");
 
-        // ------------ ЧАСТЬ 2: Демонстрация перегрузки операторов --------
+        // ------------ ЧАСТЬ 2: Демонстрация операторов -------------------
         Console.WriteLine("\nДемонстрация перегрузки операторов:");
 
         point1 = new Point(10.0, 15.0);
@@ -56,7 +56,7 @@ class Program
         // ------------ ЧАСТЬ 3: Демонстрация работы с массивом ------------
         Console.WriteLine("\nДемонстрация работы с массивом PointArray:");
 
-        PointArray pointArray = new PointArray(5); // массив из 5 случайных точек
+        PointArray pointArray = new PointArray(5);
         Console.WriteLine("\nСодержимое массива точек:");
         pointArray.PrintArray();
 

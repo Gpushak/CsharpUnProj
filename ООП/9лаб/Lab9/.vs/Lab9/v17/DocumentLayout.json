@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\",
+  "WorkspaceRootPath": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\9\u043B\u0430\u0431\\lab9\\lab9\\pointarray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|solutionrelative:lab9\\pointarray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\9\u043B\u0430\u0431\\lab9\\lab9\\point.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\c#_un_proj\\csharpunproj\\\u043E\u043E\u043F\\9\u043B\u0430\u0431\\lab9\\lab9\\point.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|solutionrelative:lab9\\point.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\9\u043B\u0430\u0431\\lab9\\lab9\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\c#_un_proj\\csharpunproj\\\u043E\u043E\u043F\\9\u043B\u0430\u0431\\lab9\\lab9\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|solutionrelative:lab9\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\c#_un_proj\\csharpunproj\\\u043E\u043E\u043F\\9\u043B\u0430\u0431\\lab9\\lab9\\pointarray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9656D197-BFA7-49C5-9043-636CED2F1FDE}|Lab9\\Lab9.csproj|solutionrelative:lab9\\pointarray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Program.cs",
+              "RelativeDocumentMoniker": "Lab9\\Program.cs",
+              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Program.cs",
+              "RelativeToolTip": "Lab9\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-08T18:45:34.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "PointArray.cs",
-              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\PointArray.cs",
+              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\PointArray.cs",
               "RelativeDocumentMoniker": "Lab9\\PointArray.cs",
-              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\PointArray.cs",
+              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\PointArray.cs",
               "RelativeToolTip": "Lab9\\PointArray.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADoAAABSAAAA",
+              "ViewState": "AQIAABcAAAAAAAAAAAAAADsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-08T18:58:38.435Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Point.cs",
-              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Point.cs",
+              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Point.cs",
               "RelativeDocumentMoniker": "Lab9\\Point.cs",
-              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Point.cs",
+              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Point.cs",
               "RelativeToolTip": "Lab9\\Point.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADoAAAAsAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-08T18:46:30.317Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Program.cs",
-              "RelativeDocumentMoniker": "Lab9\\Program.cs",
-              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\9\u043B\u0430\u0431\\Lab9\\Lab9\\Program.cs",
-              "RelativeToolTip": "Lab9\\Program.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAgwD8AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-08T18:45:34.962Z",
               "EditorCaption": ""
             }
           ]

@@ -83,6 +83,17 @@ public static class ArrayHelper
             Console.WriteLine("Массив пустой.");
             return array;
         }
-        return Array.FindAll(array, x => x % 2 == 0);
+
+        List<int> evenNumbers = new List<int>();
+
+        foreach (int x in array)
+        {
+            if (x % 2 == 0)
+            {
+                evenNumbers.Add(x);
+            }
+        }
+
+        return evenNumbers.ToArray();
     }
 }

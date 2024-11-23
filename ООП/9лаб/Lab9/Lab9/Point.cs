@@ -5,10 +5,8 @@ public class Point
     double x;
     double y;
 
-    // переменная для подсчета количества созданных объектов
     static int instanceCount = 0;
 
-    // Свойства для доступа к координатам
     public double X
     {
         get { return x; }
@@ -21,12 +19,11 @@ public class Point
         set { y = value; }
     }
 
-    // Конструктор для инициализации координат и увеличения счетчика
     public Point(double x, double y)
     {
         this.x = x;
         this.y = y;
-        instanceCount++;  // Увеличение статической переменной при создании объекта
+        instanceCount++;  
     }
 
     // Метод для вычисления расстояния от точки до начала координат
@@ -47,7 +44,6 @@ public class Point
         get { return instanceCount; }
     }
 
-    // Метод для вывода координат точки
     public void PrintCoordinates()
     {
         Console.WriteLine($"Точка с координатами: X = {x}, Y = {y}");
@@ -55,7 +51,7 @@ public class Point
 
     //--------------ЧАСТЬ 2----------------------------------------------------
 
-    // Перегрузка унарного оператора -- для уменьшения координат x и y на 1
+    // уменьшение координат на 1
     public static Point operator --(Point p)
     {
         p.x--;
@@ -63,37 +59,37 @@ public class Point
         return p;
     }
 
-    // Перегрузка унарного оператора - для смены координат местами
+    // смена координат местами
     public static Point operator -(Point p)
     {
         return new Point(p.y, p.x);
     }
 
-    // Перегрузка оператора приведения типа к int (неявная)
+    // приведение типа к int (неявная)
     public static implicit operator int(Point p)
     {
         return (int)p.x;
     }
 
-    // Перегрузка оператора приведения типа к double (явная)
+    // приведение к double (явная)
     public static explicit operator double(Point p)
     {
         return p.y;
     }
 
-    // Бинарная операция: Point - int (уменьшается координата x)
+    // уменьшается координата x
     public static Point operator -(Point p, int value)
     {
         return new Point(p.x - value, p.y);
     }
 
-    // Бинарная операция: int - Point (уменьшается координата y)
+    // уменьшается координата y
     public static Point operator -(int value, Point p)
     {
         return new Point(p.x, p.y - value);
     }
 
-    // Бинарная операция: Point - Point (вычисляется расстояние между точками)
+    // вычисляется расстояние между точками
     public static double operator -(Point p1, Point p2)
     {
         return Math.Sqrt(Math.Pow(p1.x - p2.x, 2) + Math.Pow(p1.y - p2.y, 2));
