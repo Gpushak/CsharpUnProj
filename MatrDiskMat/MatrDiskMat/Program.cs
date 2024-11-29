@@ -94,60 +94,88 @@ class Program
         }
     }
 
+    static void CheckEquivalence(bool reflexive, bool symmetric, bool transitive)
+    {
+        if (reflexive && symmetric && transitive)
+        {
+            Console.WriteLine("Отношение является отношением эквивалентности.");
+        }
+        else
+        {
+            Console.WriteLine("Отношение не является отношением эквивалентности.");
+        }
+    }
+
+    static void CheckOrder(bool reflexive, bool antiSymmetric, bool transitive, bool connected)
+    {
+        if (reflexive && antiSymmetric && transitive && connected)
+        {
+            Console.WriteLine("Отношение является нестрогим полным порядком.");
+        }
+        else if (!reflexive && antiSymmetric && transitive && connected)
+        {
+            Console.WriteLine("Отношение является строгим полным порядком.");
+        }
+        else if (reflexive && antiSymmetric && transitive && !connected)
+        {
+            Console.WriteLine("Отношение является нестрогим частичным порядком.");
+        }
+        else if (!reflexive && antiSymmetric && transitive && !connected)
+        {
+            Console.WriteLine("Отношение является строгим частичным порядком.");
+        }
+        else
+        {
+            Console.WriteLine("Отношение не соответствует ни одному из известных типов порядка.");
+        }
+    }
     static void CheckMatrixProperties()
     {
-        bool isReflexive = true, isAntiReflexive = true;
-        bool isSymmetric = true, isAntiSymmetric = true, isAsymmetric = true;
-        bool isTransitive = true, isConnected = true;
+        bool reflexive = true, antiReflexive = true;
+        bool symmetric = true, antiSymmetric = true, asymmetric = true;
+        bool transitive = true, connected = true;
 
         for (int i = 0; i < size; i++)
         {
             if (matrix[i, i] != 1)
-                isReflexive = false;
+                reflexive = false;
             if (matrix[i, i] != 0)
-                isAntiReflexive = false;
+                antiReflexive = false;
 
             for (int j = 0; j < size; j++)
             {
                 if (i != j)
                 {
                     if (matrix[i, j] != matrix[j, i])
-                        isSymmetric = false;
+                        symmetric = false;
                     if (matrix[i, j] == 1 && matrix[j, i] == 1)
-                        isAntiSymmetric = false;
+                        antiSymmetric = false;
                     if (matrix[i, j] == 1 && matrix[j, i] == 1)
-                        isAsymmetric = false;
+                        asymmetric = false;
                     if (matrix[i, j] == 0 && matrix[j, i] == 0)
-                        isConnected = false;
+                        connected = false;
                 }
                 for (int k = 0; k < size; k++)
                 {
                     if (matrix[i, j] == 1 && matrix[j, k] == 1 && matrix[i, k] != 1)
-                        isTransitive = false;
+                        transitive = false;
                 }
             }
         }
 
-        bool isEquivalenceRelation = isReflexive && isSymmetric && isTransitive;
-        bool isPartialOrder = isReflexive && isAntiSymmetric && isTransitive;
-        bool isStrictPartialOrder = isAntiReflexive && isTransitive;
-
         Console.WriteLine("Свойства матрицы:");
-        Console.WriteLine($"Рефлексивна: {isReflexive}");
-        Console.WriteLine($"Антирефлексивна: {isAntiReflexive}");
-        Console.WriteLine($"Симметрична: {isSymmetric}");
-        Console.WriteLine($"Антисимметрична: {isAntiSymmetric}");
-        Console.WriteLine($"Асимметрична: {isAsymmetric}");
-        Console.WriteLine($"Транзитивна: {isTransitive}");
-        Console.WriteLine($"Связана (полная): {isConnected}");
-        Console.WriteLine($"Является отношением эквивалентности: {isEquivalenceRelation}");
+        Console.WriteLine($"Рефлексивна: {reflexive}");
+        Console.WriteLine($"Антирефлексивна: {antiReflexive}");
+        Console.WriteLine($"Симметрична: {symmetric}");
+        Console.WriteLine($"Антисимметрична: {antiSymmetric}");
+        Console.WriteLine($"Асимметрична: {asymmetric}");
+        Console.WriteLine($"Транзитивна: {transitive}");
+        Console.WriteLine($"Связана (полная): {connected}");
 
-        if (isPartialOrder)
-            Console.WriteLine("Отношение является частичным порядком.");
-        else if (isStrictPartialOrder)
-            Console.WriteLine("Отношение является строгим частичным порядком.");
-        else
-            Console.WriteLine("Отношение не соответствует ни одному из известных типов порядка.");
+        CheckEquivalence(reflexive, symmetric, transitive);
+        CheckOrder(reflexive, antiSymmetric, transitive, connected);
     }
 
+
+    
 }
