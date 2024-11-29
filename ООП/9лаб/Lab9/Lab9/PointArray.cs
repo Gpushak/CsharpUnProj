@@ -5,14 +5,12 @@ public class PointArray
     Point[] arr; 
     static int instanceCount = 0; 
 
-    // Конструктор без параметров
     public PointArray()
     {
         arr = new Point[0];
         instanceCount++;
     }
 
-    // Конструктор с параметром для создания массива случайных объектов Point
     public PointArray(int size)
     {
         arr = new Point[size];
@@ -24,7 +22,6 @@ public class PointArray
         instanceCount++;
     }
 
-    // Метод для просмотра элементов массива
     public void PrintArray()
     {
         for (int i = 0; i < arr.Length; i++)
@@ -33,7 +30,7 @@ public class PointArray
         }
     }
 
-    // Индексатор для доступа к элементам массива
+    // Индексатор
     public Point this[int index]
     {
         get
@@ -50,13 +47,11 @@ public class PointArray
         }
     }
 
-    // Свойство Length для получения длины массива
     public int Length
     {
         get { return arr.Length; }
     }
 
-    // Статическое свойство для получения количества созданных объектов PointArray
     public static int InstanceCount
     {
         get { return instanceCount; }
