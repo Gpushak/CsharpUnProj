@@ -1,0 +1,15 @@
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\bin\Debug\net8.0\3labaDiskMat.exe
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\bin\Debug\net8.0\3labaDiskMat.deps.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\bin\Debug\net8.0\3labaDiskMat.runtimeconfig.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\bin\Debug\net8.0\3labaDiskMat.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\bin\Debug\net8.0\3labaDiskMat.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.AssemblyInfoInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.AssemblyInfo.cs
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.csproj.CoreCompileInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.sourcelink.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\refint\3labaDiskMat.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\3labaDiskMat.genruntimeconfig.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\3labaDiskMat\3labaDiskMat\obj\Debug\net8.0\ref\3labaDiskMat.dll
