@@ -4,6 +4,21 @@
     "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10Lab\\10Lab\\10Lab.csproj": {}
   },
   "projects": {
+    "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10labLib\\10labLib\\10labLib.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10labLib\\10labLib\\10labLib.csproj",
+        "projectName": "10labLib",
+        "projectPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10labLib\\10labLib\\10labLib.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
     "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10Lab\\10Lab\\10Lab.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -32,7 +47,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10labLib\\10labLib\\10labLib.csproj": {
+                "projectPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10labLib\\10labLib\\10labLib.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

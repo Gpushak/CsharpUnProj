@@ -1,11 +1,29 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "10labLib/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/10labLib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/10labLib.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "10labLib/1.0.0": {
+      "type": "project",
+      "path": "../../10labLib/10labLib/10labLib.csproj",
+      "msbuildProject": "../../10labLib/10labLib/10labLib.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "10labLib >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\igleb\\.nuget\\packages\\": {},
@@ -39,7 +57,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10labLib\\10labLib\\10labLib.csproj": {
+              "projectPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\ООП\\10лаб\\10labLib\\10labLib\\10labLib.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
