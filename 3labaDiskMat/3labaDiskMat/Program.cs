@@ -1,235 +1,333 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
 
-class Program
+namespace QuineMethod
 {
-    static void Main(string[] args)
+    internal class Program
     {
-        // Ввод вектора длиной 16
-        int[] vector = InputVector();
-        if (vector.Length != 16)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Ошибка: вектор должен содержать ровно 16 значений.");
-            return;
+            QuineSolver solver = new QuineSolver();
+            solver.Run();
         }
-
-        // Формирование таблицы истинности
-        Console.WriteLine("\nТаблица истинности:");
-        PrintTruthTable(vector);
-
-        // Формирование СДНФ
-        string sdnf = GetSDNF(vector);
-        Console.WriteLine($"\nСДНФ: {sdnf}");
-
-        // Формирование СКНФ
-        string sknf = GetSKNF(vector);
-        Console.WriteLine($"\nСКНФ: {sknf}");
-
-        // Минимизация методом Квайна
-        Console.WriteLine("\nМинимизация методом Квайна:");
-        MinimizeQuine(vector);
     }
 
-    static int[] InputVector()
+    public class QuineSolver
     {
-        Console.WriteLine("Выберите способ ввода данных:");
-        Console.WriteLine("1. Ввод с консоли");
-        Console.WriteLine("2. Чтение из файла");
+        private int[] _vector = new int[16];
+        private int[,] _truthTable = new int[16, 5];
+        private string[] _notGlued = Array.Empty<string>();
 
-        int choice = int.Parse(Console.ReadLine() ?? "1");
-        if (choice == 1)
+        public void Run()
         {
-            Console.WriteLine("Введите 16 значений вектора (0 или 1), разделенных пробелом:");
-            return Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-        }
-        else if (choice == 2)
-        {
-            Console.WriteLine("Введите путь к файлу:");
-            string filePath = Console.ReadLine();
-            if (File.Exists(filePath))
+            InputHandler inputHandler = new InputHandler();
+            FileHandler fileHandler = new FileHandler(inputHandler);
+            TruthTableGenerator truthTableGenerator = new TruthTableGenerator();
+            SDNFHandler sdnfHandler = new SDNFHandler();
+
+            fileHandler.GetVectorFromFile(ref _vector);
+            Console.Write("Полученный вектор из файла: ");
+            DisplayVector();
+
+            truthTableGenerator.Generate(ref _truthTable, _vector);
+            truthTableGenerator.Display(_truthTable);
+
+            string[] sdnf = sdnfHandler.GenerateSDNF(ref _truthTable);
+
+            if (sdnf.Length == 0)
             {
-                return File.ReadAllText(filePath).Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
-                                                .Select(int.Parse).ToArray();
+                Console.WriteLine("Для введённых данных не существует МДНФ!");
+                return;
+            }
+
+            string[] temp = sdnf;
+            string[] gluing;
+            do
+            {
+                gluing = sdnfHandler.QuineSimplify(ref temp, ref _notGlued);
+                Console.WriteLine("-----------");
+                sdnfHandler.DisplaySDNF(gluing);
+                if (gluing.Length != 0) temp = gluing;
+            }
+            while (gluing.Length != 0);
+
+            if (temp.Length > 0 && !string.IsNullOrEmpty(temp[0]))
+            {
+                Console.WriteLine("Импликантная таблица:");
+                sdnfHandler.ShowImplicantTable(ref sdnf, ref temp, _notGlued);
             }
             else
             {
-                Console.WriteLine("Файл не найден.");
-                return new int[0];
-            }
-        }
-        else
-        {
-            Console.WriteLine("Неверный выбор.");
-            return new int[0];
-        }
-    }
-
-    static void PrintTruthTable(int[] vector)
-    {
-        Console.WriteLine("| №  | a | b | c | d | f |");
-        Console.WriteLine("|----|---|---|---|---|---|");
-        for (int i = 0; i < 16; i++)
-        {
-            int a = (i & 8) >> 3;
-            int b = (i & 4) >> 2;
-            int c = (i & 2) >> 1;
-            int d = i & 1;
-            Console.WriteLine($"| {i + 1,2} | {a} | {b} | {c} | {d} | {vector[i]} |");
-        }
-    }
-
-    static string GetSDNF(int[] vector)
-    {
-        List<string> terms = new List<string>();
-        for (int i = 0; i < 16; i++)
-        {
-            if (vector[i] == 1)
-            {
-                terms.Add(GenerateTerm(i, true));
-            }
-        }
-        return string.Join(" v ", terms);
-    }
-
-    static string GetSKNF(int[] vector)
-    {
-        List<string> terms = new List<string>();
-        for (int i = 0; i < 16; i++)
-        {
-            if (vector[i] == 0)
-            {
-                terms.Add("(" + GenerateTerm(i, false) + ")");
-            }
-        }
-        return string.Join(" ^ ", terms);
-    }
-
-    static string GenerateTerm(int index, bool isSDNF)
-    {
-        string[] vars = { "a", "b", "c", "d" };
-        List<string> term = new List<string>();
-        for (int i = 0; i < 4; i++)
-        {
-            bool bit = (index & (1 << (3 - i))) != 0;
-            term.Add((isSDNF == bit ? "" : "!") + vars[i]);
-        }
-        return string.Join("", term);
-    }
-
-    static void MinimizeQuine(int[] vector)
-    {
-        // Шаг 1: Первичные импликанты
-        List<string> implicants = GetPrimaryImplicants(vector);
-        Console.WriteLine("\nШаг 1: Первичные импликанты:");
-        Console.WriteLine(string.Join(", ", implicants));
-
-        // Шаг 2: Построение импликантной матрицы
-        Console.WriteLine("\nШаг 2: Импликантная матрица:");
-        BuildImplicantMatrix(vector, implicants);
-
-        // Шаг 3: Минимизация
-        Console.WriteLine("\nШаг 3: Минимизация:");
-        List<string> minimized = MinimizeImplicants(vector, implicants);
-        Console.WriteLine("Минимизированная функция: " + string.Join(" v ", minimized));
-    }
-
-    static List<string> GetPrimaryImplicants(int[] vector)
-    {
-        // Преобразование индексов строк таблицы истинности в бинары
-        List<string> implicants = new List<string>();
-        for (int i = 0; i < 16; i++)
-        {
-            if (vector[i] == 1)
-            {
-                implicants.Add(Convert.ToString(i, 2).PadLeft(4, '0'));
+                Console.WriteLine("Таблица импликантности пуста!");
             }
         }
 
-        // Попарное склеивание
-        bool[] used = new bool[implicants.Count];
-        List<string> newImplicants = new List<string>();
-        for (int i = 0; i < implicants.Count; i++)
+        private void DisplayVector()
         {
-            for (int j = i + 1; j < implicants.Count; j++)
+            for (int i = 1; i <= 16; i++)
             {
-                string combined = CombineImplicants(implicants[i], implicants[j]);
-                if (combined != null)
+                if (i / 4 > 0 && i % 4 == 1)
                 {
-                    newImplicants.Add(combined);
-                    used[i] = used[j] = true;
+                    Console.Write(" ");
                 }
-            }
-        }
-
-        // Добавление несократившихся импликант
-        for (int i = 0; i < implicants.Count; i++)
-        {
-            if (!used[i])
-            {
-                newImplicants.Add(implicants[i]);
-            }
-        }
-        return newImplicants;
-    }
-
-    static string CombineImplicants(string imp1, string imp2)
-    {
-        int diffCount = 0;
-        int diffIndex = -1;
-
-        for (int i = 0; i < imp1.Length; i++)
-        {
-            if (imp1[i] != imp2[i])
-            {
-                diffCount++;
-                diffIndex = i;
-            }
-        }
-
-        if (diffCount == 1)
-        {
-            char[] combined = imp1.ToCharArray();
-            combined[diffIndex] = '-';
-            return new string(combined);
-        }
-        return null;
-    }
-
-    static void BuildImplicantMatrix(int[] vector, List<string> implicants)
-    {
-        Console.Write("|       |");
-        for (int i = 0; i < 16; i++) Console.Write($" {i + 1,3} |");
-        Console.WriteLine();
-
-        foreach (var implicant in implicants)
-        {
-            Console.Write($"| {implicant,-5} |");
-            for (int i = 0; i < 16; i++)
-            {
-                Console.Write($"  {(Covers(implicant, i) ? "+" : " ")} |");
+                Console.Write(_vector[i - 1]);
             }
             Console.WriteLine();
         }
     }
 
-    static bool Covers(string implicant, int index)
+    public class InputHandler
     {
-        string binaryIndex = Convert.ToString(index, 2).PadLeft(4, '0');
-        for (int i = 0; i < implicant.Length; i++)
+        public int GetNumber()
         {
-            if (implicant[i] != '-' && implicant[i] != binaryIndex[i])
+            int number;
+            bool isValid;
+            do
             {
-                return false;
+                Console.WriteLine("Введите название файла: ");
+                string input = Console.ReadLine();
+                isValid = int.TryParse(input, out number);
+                if (!isValid)
+                {
+                    Console.WriteLine("Чёта ни то ;(");
+                }
             }
+            while (!isValid);
+            return number;
         }
-        return true;
     }
 
-    static List<string> MinimizeImplicants(int[] vector, List<string> implicants)
+    public class FileHandler
     {
-        // Выбор покрытия
-        return implicants; // Пока возвращаем все импликанты
+        private readonly InputHandler _inputHandler;
+
+        public FileHandler(InputHandler inputHandler)
+        {
+            _inputHandler = inputHandler;
+        }
+
+        public void GetVectorFromFile(ref int[] vector)
+        {
+            string fileContent;
+            FileInfo fileInfo;
+
+            do
+            {
+                int fileNumber = _inputHandler.GetNumber();
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{fileNumber}.txt");
+                fileInfo = new FileInfo(filePath);
+
+                if (!fileInfo.Exists)
+                {
+                    Console.WriteLine("Нет такого");
+                }
+            }
+            while (!fileInfo.Exists);
+
+            fileContent = File.ReadAllText(fileInfo.FullName);
+
+            for (int i = 0; i < 16; i++)
+            {
+                if (int.TryParse(fileContent[i].ToString(), out int value))
+                {
+                    vector[i] = value;
+                }
+            }
+        }
     }
+
+    public class TruthTableGenerator
+    {
+        public void Generate(ref int[,] truthTable, int[] vector)
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                int x = (i & 8) >> 3;
+                int y = (i & 4) >> 2;
+                int z = (i & 2) >> 1;
+                int w = i & 1;
+
+                truthTable[i, 0] = x;
+                truthTable[i, 1] = y;
+                truthTable[i, 2] = z;
+                truthTable[i, 3] = w;
+                truthTable[i, 4] = vector[i];
+            }
+        }
+
+        public void Display(int[,] truthTable)
+        {
+            Console.WriteLine("Таблица истинности:");
+            Console.WriteLine(",---,---,---,---,---,");
+            Console.WriteLine("| x | y | z | w | f |");
+            Console.WriteLine("|---|---|---|---|---|");
+
+            for (int i = 0; i < 16; i++)
+            {
+                Console.WriteLine($"| {truthTable[i, 0]} | {truthTable[i, 1]} | {truthTable[i, 2]} | {truthTable[i, 3]} | {truthTable[i, 4]} |");
+            }
+
+            Console.WriteLine("'---'---'---'---'---'");
+        }
+    }
+
+    public class SDNFHandler
+    {
+        public string[] GenerateSDNF(ref int[,] truthTable)
+        {
+            int size = 0;
+            for (int i = 0; i < 16; i++)
+            {
+                if (truthTable[i, 4] == 1)
+                {
+                    size++;
+                }
+            }
+
+            string[] sdnf = new string[size];
+            int k = 0;
+
+            for (int i = 0; i < 16; i++)
+            {
+                if (truthTable[i, 4] == 1)
+                {
+                    sdnf[k] = "";
+                    if (truthTable[i, 0] == 0) sdnf[k] += 'X';
+                    else sdnf[k] += 'x';
+                    if (truthTable[i, 1] == 0) sdnf[k] += 'Y';
+                    else sdnf[k] += 'y';
+                    if (truthTable[i, 2] == 0) sdnf[k] += 'Z';
+                    else sdnf[k] += 'z';
+                    if (truthTable[i, 3] == 0) sdnf[k] += 'W';
+                    else sdnf[k] += 'w';
+                    k++;
+                }
+            }
+
+            Console.Write("СДНФ: ");
+            DisplaySDNF(sdnf);
+
+            return sdnf;
+        }
+
+        public string[] QuineSimplify(ref string[] sdnf, ref string[] notGlued)
+        {
+            string[] gluing = Array.Empty<string>();
+
+            for (int i = 0; i < sdnf.Length; i++)
+            {
+                bool isSame = false;
+                int counter = 0;
+                string element = sdnf[i];
+
+                for (int j = 0; j < sdnf.Length; j++)
+                {
+                    string tempString = "";
+                    isSame = false;
+
+                    for (int k = 0; k < element.Length; k++)
+                    {
+                        if (element[k] == sdnf[j][k])
+                        {
+                            tempString += element[k];
+                        }
+                        else if (Math.Abs(element[k] - sdnf[j][k]) == 32) // Проверка на противоположные переменные (например, x и X)
+                        {
+                            isSame = true;
+                        }
+                    }
+
+                    if (tempString.Length == element.Length - 1 && isSame && !IsFound(gluing, tempString))
+                    {
+                        Array.Resize(ref gluing, gluing.Length + 1);
+                        gluing[gluing.Length - 1] = tempString;
+                        Console.WriteLine($"{i + 1} - {j + 1}: {gluing[gluing.Length - 1]}");
+                    }
+                    else
+                    {
+                        counter++;
+                        if (counter == sdnf.Length && !IsFound(notGlued, element))
+                        {
+                            Array.Resize(ref notGlued, notGlued.Length + 1);
+                            notGlued[notGlued.Length - 1] = element;
+                        }
+                    }
+                }
+            }
+
+            return gluing;
+        }
+
+        public void ShowImplicantTable(ref string[] sdnf, ref string[] final, string[] notGlued)
+        {
+            Console.WriteLine(",-----," + string.Concat(Enumerable.Repeat("------,", sdnf.Length)));
+            Console.Write("|     |");
+            foreach (var term in sdnf)
+            {
+                Console.Write($" {term} |");
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("|-----|" + string.Concat(Enumerable.Repeat("------|", sdnf.Length)));
+
+            foreach (var implicant in final)
+            {
+                Console.Write("| ");
+                Console.Write(implicant.PadRight(5) + "|");
+
+                foreach (var term in sdnf)
+                {
+                    bool containsAll = implicant.All(c => term.Contains(c));
+                    Console.Write(containsAll ? "  +   |" : "      |");
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("'-----'" + string.Concat(Enumerable.Repeat("------'", sdnf.Length)));
+            }
+        }
+
+        public static int[] InputVectorFromConsole()
+        {
+            int[] vector = new int[16];
+            Console.WriteLine("Введите 16 значений для вектора (только 0 и 1), разделяя их пробелом:");
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+                string[] inputs = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                if (inputs.Length == 16 && inputs.All(val => val == "0" || val == "1"))
+                {
+                    vector = inputs.Select(int.Parse).ToArray();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Вводи нормально емае");
+                }
+            }
+
+            return vector;
+        }
+
+
+        public void DisplaySDNF(string[] sdnf)
+        {
+            for (int i = 0; i < sdnf.Length; i++)
+            {
+                Console.Write(sdnf[i]);
+                if (i != sdnf.Length - 1)
+                {
+                    Console.Write(" + ");
+                }
+            }
+            Console.WriteLine();
+        }
+
+        private bool IsFound(string[] array, string element)
+        {
+            return array.Any(item => item == element);
+        }
+    }
+
 }
