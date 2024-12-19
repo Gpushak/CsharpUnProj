@@ -1,0 +1,15 @@
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\bin\Debug\net8.0\tochno3labaDisk.exe
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\bin\Debug\net8.0\tochno3labaDisk.deps.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\bin\Debug\net8.0\tochno3labaDisk.runtimeconfig.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\bin\Debug\net8.0\tochno3labaDisk.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\bin\Debug\net8.0\tochno3labaDisk.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.AssemblyInfoInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.AssemblyInfo.cs
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.csproj.CoreCompileInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.sourcelink.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\refint\tochno3labaDisk.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\tochno3labaDisk.genruntimeconfig.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\tochno3labaDisk\tochno3labaDisk\obj\Debug\net8.0\ref\tochno3labaDisk.dll
