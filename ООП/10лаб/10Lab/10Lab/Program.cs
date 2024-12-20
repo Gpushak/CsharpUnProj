@@ -5,6 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        
         var rand = new Random();
 
         Production[] productions1 = new Production[6];
@@ -39,19 +40,19 @@ class Program
         productions2[3] = new Gild { Name = "Gild_4", EmployeeCount = 25, Supervisor = "Michael Brown" };
 
         // Запрос 1: Наименование всех цехов на заданной фабрике
-        Console.WriteLine("Enter factory name to list its Gilds:");
+        Console.WriteLine("Введите название фабрики, чтобы просмотреть ее цеха:");
         string factoryName = Console.ReadLine();
         Queries.GetGildNamesOnFactory(productions2, factoryName);
 
         // Запрос 2: Имена рабочих заданного цеха
-        Console.WriteLine("\nEnter Gild name to get its supervisor:");
+        Console.WriteLine("\nВведите название цеха, чтобы получить его работников:");
         string GildName = Console.ReadLine();
         Queries.GetSupervisorsOnGild(productions2, GildName);
 
         // Запрос 3: Количество рабочих на фабриках
-        Console.WriteLine("\nCalculating total employees in all factories...");
+        Console.WriteLine("\nПодсчет общего числа сотрудников на всех заводах...");
         int totalEmployees = Queries.GetEmployeeCountOnFactory(productions2);
-        Console.WriteLine($"Total employees in all factories: {totalEmployees}");
+        Console.WriteLine($"Общее количество сотрудников на всех заводах: {totalEmployees}");
 
         //---------------------------3 Часть-------------------------------
 
@@ -78,7 +79,7 @@ class Program
                 unit.Show();
         }
 
-        Console.WriteLine("\nSorting by Employee Count...");
+        Console.WriteLine("\nСортировка по количеству сотрудников...");
         Array.Sort(items, (x, y) =>
         {
             if (x is Production px && y is Production py)

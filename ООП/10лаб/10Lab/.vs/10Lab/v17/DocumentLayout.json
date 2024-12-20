@@ -6,12 +6,6 @@
       "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\production.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\factory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\gild.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\productionnamecomparer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -22,6 +16,12 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\workshop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\gild.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\factory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EA326D55-0B9C-49C3-9DFA-C07A60DB11CB}|..\\10labLib\\10labLib\\10labLib.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\10\u043B\u0430\u0431\\10lablib\\10lablib\\iinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -42,19 +42,20 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "StandaloneUnit.cs",
               "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\StandaloneUnit.cs",
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\StandaloneUnit.cs",
               "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\StandaloneUnit.cs",
               "RelativeToolTip": "..\\10labLib\\10labLib\\StandaloneUnit.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAqAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T14:50:56.619Z"
+              "WhenOpened": "2024-12-06T14:50:56.619Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "ProductionNameComparer.cs",
               "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\ProductionNameComparer.cs",
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\ProductionNameComparer.cs",
@@ -62,47 +63,51 @@
               "RelativeToolTip": "..\\10labLib\\10labLib\\ProductionNameComparer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T14:48:48.557Z"
+              "WhenOpened": "2024-12-06T14:48:48.557Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Queries.cs",
               "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Queries.cs",
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\Queries.cs",
               "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Queries.cs",
               "RelativeToolTip": "..\\10labLib\\10labLib\\Queries.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T14:47:19.912Z"
+              "WhenOpened": "2024-12-06T14:47:19.912Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Gild.cs",
               "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Gild.cs",
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\Gild.cs",
               "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Gild.cs",
               "RelativeToolTip": "..\\10labLib\\10labLib\\Gild.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAtAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T14:44:36.852Z"
+              "WhenOpened": "2024-12-06T14:44:36.852Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "Workshop.cs",
               "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Workshop.cs",
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\Workshop.cs",
               "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Workshop.cs",
               "RelativeToolTip": "..\\10labLib\\10labLib\\Workshop.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAA0wEcAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T14:42:55.466Z"
+              "WhenOpened": "2024-12-06T14:42:55.466Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Factory.cs",
               "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Factory.cs",
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\Factory.cs",
@@ -110,7 +115,8 @@
               "RelativeToolTip": "..\\10labLib\\10labLib\\Factory.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADIAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T14:42:09.853Z"
+              "WhenOpened": "2024-12-06T14:42:09.853Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -120,9 +126,10 @@
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\IInit.cs",
               "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\IInit.cs",
               "RelativeToolTip": "..\\10labLib\\10labLib\\IInit.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAUAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T11:30:41.935Z"
+              "WhenOpened": "2024-12-06T11:30:41.935Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -132,7 +139,7 @@
               "RelativeDocumentMoniker": "..\\10labLib\\10labLib\\Production.cs",
               "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10labLib\\10labLib\\Production.cs",
               "RelativeToolTip": "..\\10labLib\\10labLib\\Production.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAcwDwAAAAuAAAA",
+              "ViewState": "AQIAACkAAAAAAAAAAAAAwDsAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-06T09:59:11.804Z",
               "EditorCaption": ""
@@ -145,9 +152,10 @@
               "RelativeDocumentMoniker": "10Lab\\Program.cs",
               "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\10\u043B\u0430\u0431\\10Lab\\10Lab\\Program.cs",
               "RelativeToolTip": "10Lab\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAAAAAA",
+              "ViewState": "AQIAACUAAAAAAAAAAAAgwB4AAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T09:39:04.846Z"
+              "WhenOpened": "2024-12-06T09:39:04.846Z",
+              "EditorCaption": ""
             }
           ]
         }
