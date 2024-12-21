@@ -48,5 +48,13 @@ namespace _10labLib
                 return base.Equals(factory) && GildCount == factory.GildCount;
             return false;
         }
+
+        public virtual Production BaseProduction
+        {
+            get
+            {
+                return new Production(Name, EmployeeCount);
+            }
+        }
     }
 }

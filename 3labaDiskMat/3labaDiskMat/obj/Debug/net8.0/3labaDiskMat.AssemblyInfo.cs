@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("3labaDiskMat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b66c7c60ad22199f71ac059836e5efceba96281")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce12fb5e7f3a7dfd1f40a64a7b2c72a424f90a76")]
 [assembly: System.Reflection.AssemblyProductAttribute("3labaDiskMat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("3labaDiskMat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

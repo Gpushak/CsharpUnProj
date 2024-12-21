@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj": {}
+    "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj": {}
   },
   "projects": {
-    "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj": {
+    "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj",
+        "projectUniqueName": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj",
         "projectName": "3labaDiskMat",
-        "projectPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj",
+        "projectPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\3labaDiskMat.csproj",
         "packagesPath": "C:\\Users\\igleb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\obj\\",
+        "outputPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\3labaDiskMat\\3labaDiskMat\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\igleb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

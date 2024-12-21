@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MatrDiskMat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e9fb0022a77d4005ec36bfc39fb3ce0efaf790f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb9e11c7c3585618d1ed13ab7eb854ef7f02d0f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("MatrDiskMat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MatrDiskMat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

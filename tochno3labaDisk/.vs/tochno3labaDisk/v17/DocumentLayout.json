@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\tochno3labaDisk\\",
+  "WorkspaceRootPath": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\tochno3labaDisk\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A572B447-A86B-4EEF-9DD8-4A59B97F7049}|tochno3labaDisk\\tochno3labaDisk.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\tochno3labadisk\\tochno3labadisk\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A572B447-A86B-4EEF-9DD8-4A59B97F7049}|tochno3labaDisk\\tochno3labaDisk.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\c#_un_proj\\csharpunproj\\tochno3labadisk\\tochno3labadisk\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A572B447-A86B-4EEF-9DD8-4A59B97F7049}|tochno3labaDisk\\tochno3labaDisk.csproj|solutionrelative:tochno3labadisk\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\tochno3labaDisk\\tochno3labaDisk\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\tochno3labaDisk\\tochno3labaDisk\\Program.cs",
               "RelativeDocumentMoniker": "tochno3labaDisk\\Program.cs",
-              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\tochno3labaDisk\\tochno3labaDisk\\Program.cs",
+              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\C#_Un_Proj\\CsharpUnProj\\tochno3labaDisk\\tochno3labaDisk\\Program.cs",
               "RelativeToolTip": "tochno3labaDisk\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAjAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T17:50:27.622Z",
               "EditorCaption": ""

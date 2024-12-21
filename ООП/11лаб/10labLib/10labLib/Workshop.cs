@@ -69,5 +69,13 @@ namespace _10labLib
             }
             return false;
         }
+
+        public virtual Production BaseProduction
+        {
+            get
+            {
+                return new Production(Name, EmployeeCount);
+            }
+        }
     }
 }

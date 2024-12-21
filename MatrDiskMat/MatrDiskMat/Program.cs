@@ -149,8 +149,6 @@ class Program
                     if (matrix[i, j] != matrix[j, i])
                         symmetric = false;
                     if (matrix[i, j] == 1 && matrix[j, i] == 1)
-                        antiSymmetric = false;
-                    if (matrix[i, j] == 1 && matrix[j, i] == 1)
                         asymmetric = false;
                     if (matrix[i, j] == 0 && matrix[j, i] == 0)
                         connected = false;
@@ -167,7 +165,6 @@ class Program
         Console.WriteLine($"Рефлексивна: {reflexive}");
         Console.WriteLine($"Антирефлексивна: {antiReflexive}");
         Console.WriteLine($"Симметрична: {symmetric}");
-        Console.WriteLine($"Антисимметрична: {antiSymmetric}");
         Console.WriteLine($"Асимметрична: {asymmetric}");
         Console.WriteLine($"Транзитивна: {transitive}");
         Console.WriteLine($"Связана (полная): {connected}");
