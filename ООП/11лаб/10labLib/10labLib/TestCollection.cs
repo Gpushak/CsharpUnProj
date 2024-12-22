@@ -9,108 +9,123 @@ namespace _10labLib
 {
     public class TestCollections
     {
-        public Queue<Gild> Collection1 { get; private set; }
-        public Queue<string> Collection2 { get; private set; }
-        public Dictionary<Production, Gild> Collection3 { get; private set; }
-        public Dictionary<string, Gild> Collection4 { get; private set; }
+        private Queue<Factory> collection1;
+        private Queue<string> collection2;
+        private Dictionary<Production, Factory> collection3;
+        private Dictionary<string, Factory> collection4;
 
-        public TestCollections(int count)
+        public TestCollections(int numberOfElements)
         {
-            Collection1 = new Queue<Gild>();
-            Collection2 = new Queue<string>();
-            Collection3 = new Dictionary<Production, Gild>();
-            Collection4 = new Dictionary<string, Gild>();
+            collection1 = new Queue<Factory>();
+            collection2 = new Queue<string>();
+            collection3 = new Dictionary<Production, Factory>();
+            collection4 = new Dictionary<string, Factory>();
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < numberOfElements; i++)
             {
-                var gild = new Gild($"Gild {i}", 100 + i, 5, $"Supervisor {i}");
-                Collection1.Enqueue(gild);
-                Collection2.Enqueue(gild.ToString());
-                Collection3.Add(gild.BaseProduction, gild);
-                Collection4.Add(gild.Name, gild);
+                var factory = new Factory($"Factory_{i}", i * 10, new Random().Next(1, 10));
+                collection1.Enqueue(factory);
+                collection2.Enqueue(factory.ToString());
+                collection3.Add(new Production($"Production_{i}", i * 10), factory);
+                collection4.Add($"Key_{i}", factory);
             }
         }
 
-        public void AddToCollection1(Gild gild)
+        public void MeasureSearchTimes()
         {
-            Collection1.Enqueue(gild);
-        }
+            var firstElement = collection1.Peek();
+            var centralElement = collection1.ToArray()[collection1.Count / 2];
+            var lastElement = collection1.ToArray()[collection1.Count - 1];
+            var nonExistentElement = new Factory("Non-existent", 0, 0);
 
-        public void RemoveFromCollection1()
-        {
-            if (Collection1.Count > 0)
-                Collection1.Dequeue();
-        }
+            // Измерение времени для collection1 (Queue<Factory>)
+            var start = DateTime.Now;
+            bool foundFirst = collection1.Contains(firstElement);
+            var timeFirst = DateTime.Now - start;
 
-        public void MeasureSearchTime()
-        {
-            var firstElement = Collection1.Peek();
-            var centralElement = Collection1.ToArray()[Collection1.Count / 2];
-            var lastElement = Collection1.ToArray()[Collection1.Count - 1];
-            var nonExistentElement = new Gild("NonExistent", 0, 0, "None");
+            start = DateTime.Now;
+            bool foundCentral = collection1.Contains(centralElement);
+            var timeCentral = DateTime.Now - start;
 
-            MeasureContains(Collection1, firstElement, centralElement, lastElement, nonExistentElement);
-            MeasureContains(Collection2, firstElement.ToString(), centralElement.ToString(), lastElement.ToString(), "NonExistent");
-            MeasureContainsKey(Collection3, firstElement.BaseProduction, centralElement.BaseProduction, lastElement.BaseProduction, new Production("NonExistent", 0));
-            MeasureContainsKey(Collection4, firstElement.Name, centralElement.Name, lastElement.Name, "NonExistent");
-        }
+            start = DateTime.Now;
+            bool foundLast = collection1.Contains(lastElement);
+            var timeLast = DateTime.Now - start;
 
-        private void MeasureContains(Queue<Gild> collection, Gild first, Gild central, Gild last, Gild nonExistent)
-        {
-            Stopwatch stopwatch = new Stopwatch();
+            start = DateTime.Now;
+            bool foundNonExistent = collection1.Contains(nonExistentElement);
+            var timeNonExistent = DateTime.Now - start;
 
-            // Measure for first element
-            stopwatch.Start();
-            bool containsFirst = collection.Contains(first);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains first element: {containsFirst}, Time: {stopwatch.ElapsedTicks} ticks");
+            // Измерение времени для collection2 (Queue<string>)
+            start = DateTime.Now;
+            bool foundFirstString = collection2.Contains(firstElement.ToString());
+            var timeFirstString = DateTime.Now - start;
 
-            // Measure for central element
-            stopwatch.Restart();
-            bool containsCentral = collection.Contains(central);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains central element: {containsCentral}, Time: {stopwatch.ElapsedTicks} ticks");
+            start = DateTime.Now;
+            bool foundCentralString = collection2.Contains(centralElement.ToString());
+            var timeCentralString = DateTime.Now - start;
 
-            // Measure for last element
-            stopwatch.Restart();
-            bool containsLast = collection.Contains(last);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains last element: {containsLast}, Time: {stopwatch.ElapsedTicks} ticks");
+            start = DateTime.Now;
+            bool foundLastString = collection2.Contains(lastElement.ToString());
+            var timeLastString = DateTime.Now - start;
 
-            // Measure for non-existent element
-            stopwatch.Restart();
-            bool containsNonExistent = collection.Contains(nonExistent);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains non-existent element: {containsNonExistent}, Time: {stopwatch.ElapsedTicks} ticks");
-        }
+            start = DateTime.Now;
+            bool foundNonExistentString = collection2.Contains("Non-existent");
+            var timeNonExistentString = DateTime.Now - start;
 
-        private void MeasureContains(Dictionary<Production, Gild> collection, Production first, Production central, Production last, Production nonExistent)
-        {
-            Stopwatch stopwatch = new Stopwatch();
+            // Измерение времени для collection3 (Dictionary<Production, Factory>)
+            start = DateTime.Now;
+            bool foundKeyFirst = collection3.ContainsKey(new Production($"Production_0", 0));
+            var timeKeyFirst = DateTime.Now - start;
 
-            // Measure for first element
-            stopwatch.Start();
-            bool containsKeyFirst = collection.ContainsKey(first);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains key for first element: {containsKeyFirst}, Time: {stopwatch.ElapsedTicks} ticks");
+            start = DateTime.Now;
+            bool foundKeyCentral = collection3.ContainsKey(new Production($"Production_{collection3.Count / 2}", 0));
+            var timeKeyCentral = DateTime.Now - start;
 
-            // Measure for central element
-            stopwatch.Restart();
-            bool containsKeyCentral = collection.ContainsKey(central);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains key for central element: {containsKeyCentral}, Time: {stopwatch.ElapsedTicks} ticks");
+            start = DateTime.Now;
+            bool foundKeyLast = collection3.ContainsKey(new Production($"Production_{collection3.Count - 1}", 0));
+            var timeKeyLast = DateTime.Now - start;
 
-            // Measure for last element
-            stopwatch.Restart();
-            bool containsKeyLast = collection.ContainsKey(last);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains key for last element: {containsKeyLast}, Time: {stopwatch.ElapsedTicks} ticks");
+            start = DateTime.Now;
+            bool foundKeyNonExistent = collection3.ContainsKey(new Production("Non-existent", 0));
+            var timeKeyNonExistent = DateTime.Now - start;
 
-            // Measure for non-existent element
-            stopwatch.Restart();
-            bool containsKeyNonExistent = collection.ContainsKey(nonExistent);
-            stopwatch.Stop();
-            Console.WriteLine($"Contains key for non-existent element: {containsKeyNonExistent}, Time: {stopwatch.ElapsedTicks} ticks");
+            // Измерение времени для collection4 (Dictionary<string, Factory>)
+            start = DateTime.Now;
+            bool foundKeyFirstString = collection4.ContainsKey("Key_0");
+            var timeKeyFirstString = DateTime.Now - start;
+
+            start = DateTime.Now;
+            bool foundKeyCentralString = collection4.ContainsKey($"Key_{collection4.Count / 2}");
+            var timeKeyCentralString = DateTime.Now - start;
+
+            start = DateTime.Now;
+            bool foundKeyLastString = collection4.ContainsKey($"Key_{collection4.Count - 1}");
+            var timeKeyLastString = DateTime.Now - start;
+
+            start = DateTime.Now;
+            bool foundKeyNonExistentString = collection4.ContainsKey("Non-existent");
+            var timeKeyNonExistentString = DateTime.Now - start;
+
+            // Вывод результатов
+            Console.WriteLine($"Время поиска первого элемента (Queue<Factory>): {timeFirst.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска центрального элемента (Queue<Factory>): {timeCentral.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска последнего элемента (Queue<Factory>): {timeLast.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска несуществующего элемента (Queue<Factory>): {timeNonExistent.TotalMilliseconds} ms");
+
+            Console.WriteLine($"Время поиска первого элемента (Queue<string>): {timeFirstString.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска центрального элемента (Queue<string>): {timeCentralString.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска последнего элемента (Queue<string>): {timeLastString.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска несуществующего элемента (Queue<string>): {timeNonExistentString.TotalMilliseconds} ms");
+
+            Console.WriteLine($"Время поиска первого ключа (Dictionary<Production, Factory>): {timeKeyFirst.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска центрального ключа(Dictionary<Production, Factory>): {timeKeyCentral.TotalMilliseconds} ms");
+            Console.WriteLine($"Время последнего поиска ключа (Dictionary<Production, Factory>): {timeKeyLast.TotalMilliseconds} ms");
+            Console.WriteLine($"Несуществующее время поиска ключа (Dictionary<Production, Factory>): {timeKeyNonExistent.TotalMilliseconds} ms");
+
+            Console.WriteLine($"Время поиска первого ключа (Dictionary<string, Factory>): {timeKeyFirstString.TotalMilliseconds} ms");
+            Console.WriteLine($"Время поиска центрального ключа (Dictionary<string, Factory>): {timeKeyCentralString.TotalMilliseconds} ms");
+            Console.WriteLine($"Время последнего поиска ключа (Dictionary<string, Factory>): {timeKeyLastString.TotalMilliseconds} ms");
+            Console.WriteLine($"Несуществующее время поиска ключа (Dictionary<string, Factory>): {timeKeyNonExistentString.TotalMilliseconds} ms");
         }
     }
 }

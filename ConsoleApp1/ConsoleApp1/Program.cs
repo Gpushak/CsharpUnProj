@@ -1,101 +1,254 @@
 ﻿using System;
+using System.Collections.Generic;
 
-class SeriesFunction
+public interface IInit
 {
-    const double Eps = 0.0001;
+    void Init();
+    void RandomInit();
+}
 
-    // Метод для вычисления точного значения функции
-    public static double ExactValue(double x)
+public class Production : IInit, IComparable<Production>, ICloneable
+{
+    public string Name { get; set; }
+    public int EmployeeCount { get; set; }
+
+    public Production() { }
+
+    public Production(string name, int employeeCount)
     {
-        return (0.25 * Math.Log((1 + x) / (1 - x))) + 0.5 * Math.Atan(x);
+        Name = name;
+        EmployeeCount = employeeCount;
     }
 
-    // Метод для вычисления суммы ряда при заданном n
-    public static double SumForN(double x, int n)
+    public Production(Production other)
     {
-        double sum = 0.0;
-        for (int i = 0; i <= n; i++)
-        {
-            sum += Math.Pow(x, 4 * i + 1) / (4 * i + 1);
-        }
-        return sum;
+        Name = other.Name;
+        EmployeeCount = other.EmployeeCount;
     }
 
-    // Метод для вычисления суммы ряда до достижения точности Eps
-    public static double SumForEps(double x)
+    public virtual void Show()
     {
-        double sum = 0.0;
-        double term;
-        int i = 0;
-        do
-        {
-            term = Math.Pow(x, 4 * i + 1) / (4 * i + 1);
-            sum += term;
-            i++;
-        } while (Math.Abs(term) > Eps);
-
-        return sum;
+        Console.WriteLine($"Production: {Name}, Employees: {EmployeeCount}");
     }
 
-    // Метод для расчета и вывода результатов
-    public static void Calculate(double a, double b, int k, int n)
+    public virtual void Init()
     {
-        double step = (b - a) / k;
-        for (double x = a; x <= b + step; x += step)
-        {
-            double SN = SumForN(x, n);
-            double SE = SumForEps(x);
-            double Y = ExactValue(x);
+        Console.Write("Enter Name: ");
+        Name = Console.ReadLine();
+        Console.Write("Enter Employee Count: ");
+        EmployeeCount = int.Parse(Console.ReadLine());
+    }
 
-            Console.WriteLine($"X = {x:F5}, SN = {SN:F5}, SE = {SE:F5}, Y = {Y:F5}");
+    public virtual void RandomInit()
+    {
+        var rand = new Random();
+        Name = $"Production_{rand.Next(1, 100)}";
+        EmployeeCount = rand.Next(5, 100);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Production production)
+            return Name == production.Name && EmployeeCount == production.EmployeeCount;
+        return false;
+    }
+
+    public int CompareTo(Production other)
+    {
+        if (other == null) return 1;
+        return EmployeeCount.CompareTo(other.EmployeeCount);
+    }
+
+    public object Clone()
+    {
+        return new Production(Name, EmployeeCount);
+    }
+
+    public Production ShallowCopy()
+    {
+        return (Production)MemberwiseClone();
+    }
+}
+
+public class Factory : Production
+{
+    public int GildCount { get; set; }
+
+    public Factory() { }
+
+    public Factory(string name, int employeeCount, int gildCount)
+        : base(name, employeeCount)
+    {
+        GildCount = gildCount;
+    }
+
+    public Factory(Factory other) : base(other)
+    {
+        GildCount = other.GildCount;
+    }
+
+    public override void Show()
+    {
+        base.Show();
+        Console.WriteLine($"Gilds: {GildCount}");
+    }
+
+    public override void Init()
+    {
+        base.Init();
+        Console.Write("Enter Gild Count: ");
+        GildCount = int.Parse(Console.ReadLine());
+    }
+
+    public override void RandomInit()
+    {
+        base.RandomInit();
+        GildCount = new Random().Next(1, 10);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Factory factory)
+            return base.Equals(factory) && GildCount == factory.GildCount;
+        return false;
+    }
+
+    public virtual Production BaseProduction
+    {
+        get
+        {
+            return new Production(Name, EmployeeCount);
+        }
+    }
+}
+
+public class TestCollections
+{
+    private Queue<Factory> collection1;
+    private Queue<string> collection2;
+    private Dictionary<Production, Factory> collection3;
+    private Dictionary<string, Factory> collection4;
+
+    public TestCollections(int numberOfElements)
+    {
+        collection1 = new Queue<Factory>();
+        collection2 = new Queue<string>();
+        collection3 = new Dictionary<Production, Factory>();
+        collection4 = new Dictionary<string, Factory>();
+
+        for (int i = 0; i < numberOfElements; i++)
+        {
+            var factory = new Factory($"Factory_{i}", i * 10, new Random().Next(1, 10));
+            collection1.Enqueue(factory);
+            collection2.Enqueue(factory.ToString());
+            collection3.Add(new Production($"Production_{i}", i * 10), factory);
+            collection4.Add($"Key_{i}", factory);
         }
     }
 
-    public static bool Proverk(double m, double g)
+    public void MeasureSearchTimes()
     {
-        if ( m == g)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+        var firstElement = collection1.Peek();
+        var centralElement = collection1.ToArray()[collection1.Count / 2];
+        var lastElement = collection1.ToArray()[collection1.Count - 1];
+        var nonExistentElement = new Factory("Non-existent", 0, 0);
 
-    public static bool Proverk2(double m, double g)
-    {
-        if (Math.Abs(m - g) < Eps)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+        // Измерение времени для collection1 (Queue<Factory>)
+        var start = DateTime.Now;
+        bool foundFirst = collection1.Contains(firstElement);
+        var timeFirst = DateTime.Now - start;
 
-    // Точка входа в программу
+        start = DateTime.Now;
+        bool foundCentral = collection1.Contains(centralElement);
+        var timeCentral = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundLast = collection1.Contains(lastElement);
+        var timeLast = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundNonExistent = collection1.Contains(nonExistentElement);
+        var timeNonExistent = DateTime.Now - start;
+
+        // Измерение времени для collection2 (Queue<string>)
+        start = DateTime.Now;
+        bool foundFirstString = collection2.Contains(firstElement.ToString());
+        var timeFirstString = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundCentralString = collection2.Contains(centralElement.ToString());
+        var timeCentralString = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundLastString = collection2.Contains(lastElement.ToString());
+        var timeLastString = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundNonExistentString = collection2.Contains("Non-existent");
+        var timeNonExistentString = DateTime.Now - start;
+
+        // Измерение времени для collection3 (Dictionary<Production, Factory>)
+        start = DateTime.Now;
+        bool foundKeyFirst = collection3.ContainsKey(new Production($"Production_0", 0));
+        var timeKeyFirst = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundKeyCentral = collection3.ContainsKey(new Production($"Production_{collection3.Count / 2}", 0));
+        var timeKeyCentral = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundKeyLast = collection3.ContainsKey(new Production($"Production_{collection3.Count - 1}", 0));
+        var timeKeyLast = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundKeyNonExistent = collection3.ContainsKey(new Production("Non-existent", 0));
+        var timeKeyNonExistent = DateTime.Now - start;
+
+        // Измерение времени для collection4 (Dictionary<string, Factory>)
+        start = DateTime.Now;
+        bool foundKeyFirstString = collection4.ContainsKey("Key_0");
+        var timeKeyFirstString = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundKeyCentralString = collection4.ContainsKey($"Key_{collection4.Count / 2}");
+        var timeKeyCentralString = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundKeyLastString = collection4.ContainsKey($"Key_{collection4.Count - 1}");
+        var timeKeyLastString = DateTime.Now - start;
+
+        start = DateTime.Now;
+        bool foundKeyNonExistentString = collection4.ContainsKey("Non-existent");
+        var timeKeyNonExistentString = DateTime.Now - start;
+
+        // Вывод результатов
+        Console.WriteLine($"First Element Search Time (Queue<Factory>): {timeFirst.TotalMilliseconds} ms");
+        Console.WriteLine($"Central Element Search Time (Queue<Factory>): {timeCentral.TotalMilliseconds} ms");
+        Console.WriteLine($"Last Element Search Time (Queue<Factory>): {timeLast.TotalMilliseconds} ms");
+        Console.WriteLine($"Non-existent Element Search Time (Queue<Factory>): {timeNonExistent.TotalMilliseconds} ms");
+
+        Console.WriteLine($"First Element Search Time (Queue<string>): {timeFirstString.TotalMilliseconds} ms");
+        Console.WriteLine($"Central Element Search Time (Queue<string>): {timeCentralString.TotalMilliseconds} ms");
+        Console.WriteLine($"Last Element Search Time (Queue<string>): {timeLastString.TotalMilliseconds} ms");
+        Console.WriteLine($"Non-existent Element Search Time (Queue<string>): {timeNonExistentString.TotalMilliseconds} ms");
+
+        Console.WriteLine($"First Key Search Time (Dictionary<Production, Factory>): {timeKeyFirst.TotalMilliseconds} ms");
+        Console.WriteLine($"Central Key Search Time (Dictionary<Production, Factory>): {timeKeyCentral.TotalMilliseconds} ms");
+        Console.WriteLine($"Last Key Search Time (Dictionary<Production, Factory>): {timeKeyLast.TotalMilliseconds} ms");
+        Console.WriteLine($"Non-existent Key Search Time (Dictionary<Production, Factory>): {timeKeyNonExistent.TotalMilliseconds} ms");
+
+        Console.WriteLine($"First Key Search Time (Dictionary<string, Factory>): {timeKeyFirstString.TotalMilliseconds} ms");
+        Console.WriteLine($"Central Key Search Time (Dictionary<string, Factory>): {timeKeyCentralString.TotalMilliseconds} ms");
+        Console.WriteLine($"Last Key Search Time (Dictionary<string, Factory>): {timeKeyLastString.TotalMilliseconds} ms");
+        Console.WriteLine($"Non-existent Key Search Time (Dictionary<string, Factory>): {timeKeyNonExistentString.TotalMilliseconds} ms");
+    }
+}
+
+class Program
+{
     static void Main(string[] args)
     {
-        double sum = 0;
-        double a = 0.1; 
-        double b = 0.8; 
-        int k = 10;     
-        int n = 3;      
-
-        Calculate(a, b, k, n);
-
-        for (int i = 1; i < 100; i++)
-        {
-            sum = sum + 0.1;
-            if (i == 3)
-            {
-                Console.WriteLine(Proverk(sum, 0.3));
-                Console.WriteLine(Proverk2(sum, 0.3));
-            }
-            Console.WriteLine(sum);
-
-        }
+        TestCollections testCollections = new TestCollections(1000);
+        testCollections.MeasureSearchTimes();
     }
 }
