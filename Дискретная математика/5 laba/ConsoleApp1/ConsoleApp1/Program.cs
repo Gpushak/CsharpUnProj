@@ -13,7 +13,7 @@ namespace ReachabilityMatrix
             int[,] matrix = new int[N, N];
 
             Console.WriteLine("Выберите способ ввода матрицы:");
-            Console.WriteLine("1 - Считать из файла matrix.txt");
+            Console.WriteLine("1 - Считать из файла");
             Console.WriteLine("2 - Ручной ввод");
             string choice = Console.ReadLine();
 
@@ -22,8 +22,8 @@ namespace ReachabilityMatrix
                 try
                 {
                     Console.WriteLine("Введите название файла: ");
-                    string choisMatrix = Console.ReadLine();
-                    matrix = ReadMatrixFromFile(choisMatrix);
+                    string matrCh = Console.ReadLine();
+                    matrix = ReadMatrixFromFile(matrCh);
                 }
                 catch (Exception ex)
                 {
@@ -36,24 +36,28 @@ namespace ReachabilityMatrix
                 matrix = ReadMatrixFromConsole();
             }
 
-            Console.WriteLine("Граф ориентированный? (y/n):");
-            bool oriented = Console.ReadLine().Trim().ToLower() == "y";
-            if (oriented)
-            {
-                // Приводим граф к неориентированному виду (симметричная матрица)
-                matrix = MakeUndirected(matrix);
-            }
-
-            Console.WriteLine("Матрица смежности:");
+            Console.WriteLine("Исходная матрица смежности:");
             PrintMatrix(matrix);
 
-            // Вычисляем матрицу достижимости – используем алгоритм Флойда-Уоршелла (в булевой логике)
+            if (IsDirected(matrix))
+            {
+                Console.WriteLine("Обнаружен ориентированный граф. Преобразуем в неориентированный...");
+                matrix = MakeUndirected(matrix);
+                Console.WriteLine("Матрица после преобразования:");
+                PrintMatrix(matrix);
+            }
+            else
+            {
+                Console.WriteLine("Граф не является ориентированным.");
+            }
+
+            // Вычисляем матрицу достижимости – алгоритм Флойда-Уоршелла для булевой логики
             int[,] reachability = ComputeReachability(matrix);
 
             Console.WriteLine("Матрица достижимости:");
             PrintMatrix(reachability);
 
-            // Находим компоненты связности обходом в глубину
+            // Нахождение компонент связности с помощью DFS
             List<List<int>> components = GetConnectedComponents(reachability);
 
             Console.WriteLine($"Количество компонент связности: {components.Count}");
@@ -71,7 +75,22 @@ namespace ReachabilityMatrix
             Console.ReadKey();
         }
 
-        // Чтение матрицы из файла (ожидается, что в файле 10 строк, в каждой 10 чисел, разделённых пробелом)
+        // Метод для проверки, является ли граф ориентированным.
+        // Если найдется пара (i, j), для которой mat[i, j] != mat[j, i], то граф ориентированный.
+        static bool IsDirected(int[,] mat)
+        {
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = i + 1; j < N; j++)
+                {
+                    if (mat[i, j] != mat[j, i])
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        // Чтение матрицы из файла (ожидается, что в файле 10 строк, в каждой 10 чисел, разделённых пробелами)
         static int[,] ReadMatrixFromFile(string fileName)
         {
             int[,] mat = new int[N, N];
@@ -115,7 +134,7 @@ namespace ReachabilityMatrix
             return mat;
         }
 
-        // Приведение матрицы к неориентированному виду (симметричная)
+        // Приведение матрицы к неориентированному виду (симметричная матрица)
         static int[,] MakeUndirected(int[,] mat)
         {
             int[,] undirected = new int[N, N];
@@ -139,7 +158,6 @@ namespace ReachabilityMatrix
             {
                 for (int j = 0; j < N; j++)
                 {
-                    // если i==j, то true (1), иначе берем значение из матрицы
                     reach[i, j] = (i == j || mat[i, j] == 1) ? 1 : 0;
                 }
             }
@@ -151,7 +169,6 @@ namespace ReachabilityMatrix
                 {
                     for (int j = 0; j < N; j++)
                     {
-                        // Булева логика: 1 или 0
                         reach[i, j] = (reach[i, j] == 1 || (reach[i, k] == 1 && reach[k, j] == 1)) ? 1 : 0;
                     }
                 }
@@ -173,7 +190,6 @@ namespace ReachabilityMatrix
         }
 
         // Нахождение компонент связности с помощью DFS по матрице достижимости
-        // При этом мы считаем, что если из i достижима j, то они в одной компоненте
         static List<List<int>> GetConnectedComponents(int[,] reach)
         {
             bool[] visited = new bool[N];
@@ -197,7 +213,6 @@ namespace ReachabilityMatrix
             comp.Add(current);
             for (int j = 0; j < N; j++)
             {
-                // Если есть достижимость и вершина ещё не посещена
                 if (reach[current, j] == 1 && !visited[j])
                 {
                     DFS(j, reach, visited, comp);

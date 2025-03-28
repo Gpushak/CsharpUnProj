@@ -26,7 +26,7 @@ namespace _10labLib
         public override void Show()
         {
             base.Show();
-            Console.WriteLine($"Supervisor: {Supervisor}");
+
         }
 
         public override void Init()

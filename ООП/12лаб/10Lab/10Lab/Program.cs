@@ -1,15 +1,76 @@
 ﻿using System;
-using _10labLib;
+using System.Collections.Generic;
+using _10labLib; 
+
+public class DoublyLinkedList<T>
+{
+    public class Node
+    {
+        public T Value;
+        public Node Next;
+        public Node Prev;
+
+        public Node(T value)
+        {
+            Value = value;
+        }
+    }
+
+    public Node Head { get; private set; }
+    public Node Tail { get; private set; }
+
+    public Node First { get { return Head; } }
+    public Node Last { get { return Tail; } }
+
+    public void AddLast(T value)
+    {
+        Node newNode = new Node(value);
+        if (Head == null)
+        {
+            Head = newNode;
+            Tail = newNode;
+        }
+        else
+        {
+            Tail.Next = newNode;
+            newNode.Prev = Tail;
+            Tail = newNode;
+        }
+    }
+
+    public void InsertAfter(Node node, T value)
+    {
+        if (node == null) return;
+
+        Node newNode = new Node(value)
+        {
+            Next = node.Next,
+            Prev = node
+        };
+        if (node.Next != null)
+        {
+            node.Next.Prev = newNode;
+        }
+        else
+        {
+            Tail = newNode;
+        }
+        node.Next = newNode;
+    }
+
+    public void Clear()
+    {
+        Head = null;
+        Tail = null;
+    }
+}
 
 class Program
 {
     static void Main(string[] args)
     {
+        DoublyLinkedList<Production> list = new DoublyLinkedList<Production>();
 
-        // Шаг 1: Формируем двунаправленный список и заполняем его объектами из иерархии классов.
-        LinkedList<Production> list = new LinkedList<Production>();
-
-        // Создадим несколько объектов, используя RandomInit() для демонстрации
         Production prod = new Production();
         prod.RandomInit();
         list.AddLast(prod);
@@ -26,53 +87,34 @@ class Program
         workshop.RandomInit();
         list.AddLast(workshop);
 
-        // Можно добавить и больше объектов по необходимости
-
         Console.WriteLine("Исходный список:");
-        // Шаг 2: Распечатываем полученный список.
         PrintList(list);
 
-        // Шаг 3: Обработка списка – добавить (вставить) в список клоны объектов, находящихся на позициях 1, 3, 5 и т.д.
         InsertOddPositionClones(list);
 
         Console.WriteLine("\nИзменённый список:");
-        // Шаг 4: Распечатываем список после обработки.
         PrintList(list);
 
-        // Шаг 5: Удаляем список из памяти.
         list.Clear();
         list = null;
-
-        Console.WriteLine("\nСписок удалён из памяти.");
-        // Для того чтобы окно консоли не закрывалось сразу (при запуске вне IDE)
-        Console.WriteLine("Нажмите любую клавишу для выхода...");
-        Console.ReadKey();
     }
 
-    /// <summary>
-    /// Метод для вывода списка. Для каждого элемента вызывается его метод Show().
-    /// </summary>
-    static void PrintList(LinkedList<Production> list)
+    static void PrintList(DoublyLinkedList<Production> list)
     {
         int i = 1;
-        foreach (var item in list)
+        for (var node = list.First; node != null; node = node.Next)
         {
             Console.WriteLine($"Элемент {i}:");
-            item.Show();
+            node.Value.Show();
             Console.WriteLine();
             i++;
         }
     }
 
-    /// <summary>
-    /// Метод обрабатывает список: для каждого оригинального узла с нечётным номером (1, 3, 5…)
-    /// создаётся клон, который вставляется сразу после него.
-    /// </summary>
-    static void InsertOddPositionClones(LinkedList<Production> list)
+    static void InsertOddPositionClones(DoublyLinkedList<Production> list)
     {
-        // Для избежания влияния вставленных узлов на нумерацию,
-        // сначала собираем ссылки на оригинальные узлы с позициями 1,3,5,...
-        List<LinkedListNode<Production>> nodesToClone = new List<LinkedListNode<Production>>();
+        // Сначала собираем ссылки на узлы, находящиеся на нечётных позициях
+        List<DoublyLinkedList<Production>.Node> nodesToClone = new List<DoublyLinkedList<Production>.Node>();
         int pos = 1;
         for (var node = list.First; node != null; node = node.Next)
         {
@@ -87,8 +129,7 @@ class Program
         foreach (var node in nodesToClone)
         {
             Production cloned = (Production)node.Value.Clone();
-            list.AddAfter(node, cloned);
+            list.InsertAfter(node, cloned);
         }
     }
 }
-
