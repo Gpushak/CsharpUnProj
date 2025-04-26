@@ -8,24 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\igleb\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\igleb\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\Дискретная математика\\Алгоритм Прима\\PrimaDiskMat\\PrimaDiskMat\\PrimaDiskMat.csproj",
+      "projectUniqueName": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\Дискретная математика\\Алгоритм Прима\\PrimaDiskMat\\PrimaDiskMat\\PrimaDiskMat.csproj",
       "projectName": "PrimaDiskMat",
-      "projectPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\Дискретная математика\\Алгоритм Прима\\PrimaDiskMat\\PrimaDiskMat\\PrimaDiskMat.csproj",
+      "projectPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\Дискретная математика\\Алгоритм Прима\\PrimaDiskMat\\PrimaDiskMat\\PrimaDiskMat.csproj",
       "packagesPath": "C:\\Users\\igleb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\CsharpUnProj\\Дискретная математика\\Алгоритм Прима\\PrimaDiskMat\\PrimaDiskMat\\obj\\",
+      "outputPath": "C:\\Users\\igleb\\OneDrive\\Рабочий стол\\C#_Un_Proj\\CsharpUnProj\\Дискретная математика\\Алгоритм Прима\\PrimaDiskMat\\PrimaDiskMat\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\igleb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -33,7 +28,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
