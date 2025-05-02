@@ -1,91 +1,151 @@
 ﻿using System;
 
-class PrimMST
+
+public class Prima
 {
-    static void Main()
+    private int FindMinKey(int[] keys, bool[] inMst, int size)
     {
-        const int n = 10;
-        int[,] graph = new int[n, n];
-        Console.WriteLine($"Enter the {n}x{n} distance matrix (rows separated by newline, values by space):");
-        for (int i = 0; i < n; i++)
+        int minVal = int.MaxValue;
+        int minIdx = -1;
+        for (int v = 0; v < size; v++)
         {
-            string line = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(line)) { i--; continue; }
-            string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length != n)
+            if (!inMst[v] && keys[v] < minVal)
             {
-                Console.WriteLine($"Invalid input on row {i}. Expected {n} values.");
-                i--;
-                continue;
-            }
-            for (int j = 0; j < n; j++)
-            {
-                if (!int.TryParse(parts[j], out graph[i, j]))
-                {
-                    Console.WriteLine($"Invalid number '{parts[j]}' at row {i}, column {j}. Try again.");
-                    j--;
-                }
+                minVal = keys[v];
+                minIdx = v;
             }
         }
-
-        bool[] inMST = new bool[n];            // MST inclusion flag
-        int[] parent = new int[n];             // Array to store constructed MST
-        int[] key = new int[n];                // Key values used to pick minimum weight edge
-
-        // Initialize keys as infinite
-        for (int i = 0; i < n; i++)
-        {
-            key[i] = int.MaxValue;
-            inMST[i] = false;
-            parent[i] = -1;
-        }
-
-        // Start from the first vertex
-        key[0] = 0;
-
-        // Prim's algorithm
-        for (int count = 0; count < n - 1; count++)
-        {
-            // Pick the minimum key vertex not yet included
-            int u = MinKey(key, inMST);
-            inMST[u] = true;
-
-            // Update key and parent for adjacent vertices
-            for (int v = 0; v < n; v++)
-            {
-                if (graph[u, v] != 0 && !inMST[v] && graph[u, v] < key[v])
-                {
-                    parent[v] = u;
-                    key[v] = graph[u, v];
-                }
-            }
-        }
-
-        // Output the MST edges and total weight
-        Console.WriteLine("Edge \tWeight");
-        int totalWeight = 0;
-        for (int i = 1; i < n; i++)
-        {
-            Console.WriteLine($"{parent[i]} - {i} \t{graph[i, parent[i]]}");
-            totalWeight += graph[i, parent[i]];
-        }
-        Console.WriteLine($"Total weight of MST: {totalWeight}");
+        return minIdx;
     }
 
-    // Utility to find vertex with minimum key value
-    static int MinKey(int[] key, bool[] inMST)
+    public void PrimMST(int[,] graph)
     {
-        int min = int.MaxValue;
-        int minIndex = -1;
+        int size = graph.GetLength(0);
+        int[] keys = new int[size];
+        int[] parent = new int[size];
+        bool[] inMst = new bool[size];
 
-        for (int v = 0; v < key.Length; v++)
+        for (int i = 0; i < size; i++)
         {
-            if (!inMST[v] && key[v] < min)
+            keys[i] = int.MaxValue;
+            inMst[i] = false;
+        }
+
+        keys[0] = 0;
+        parent[0] = -1;
+
+        for (int count = 0; count < size - 1; count++)
+        {
+            int u = FindMinKey(keys, inMst, size);
+            if (u == -1) break;
+
+            inMst[u] = true;
+
+            for (int v = 0; v < size; v++)
             {
-                min = key[v];
-                minIndex = v;
+                if (graph[u, v] > 0 && !inMst[v] && graph[u, v] < keys[v])
+                {
+                    parent[v] = u;
+                    keys[v] = graph[u, v];
+                }
             }
         }
-        return minIndex;
+
+        PrintResult(parent, graph, size);
+    }
+
+    private void PrintResult(int[] parent, int[,] graph, int size)
+    {
+        int total = 0;
+        Console.WriteLine("Ребро\tВес");
+        for (int i = 1; i < size; i++)
+        {
+            if (parent[i] < 0 || parent[i] >= size) continue;
+
+            int weight = graph[i, parent[i]];
+            Console.WriteLine($"{parent[i] + 1} - {i + 1}\t{weight}");
+            total += weight;
+        }
+        Console.WriteLine($"Общий вес МОД: {total}\n");
+    }
+}
+
+public static class GraphProgram
+{
+    public static string[] VertexNames = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
+
+    public static int[,] GetMatrixFromFile(string fileName)
+    {
+        int[,] matrix = new int[10, 10];
+        try
+        {
+            string[] lines = File.ReadAllLines(fileName + ".txt");
+            List<int> numbers = new List<int>();
+            foreach (string line in lines)
+            {
+                string[] tokens = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string token in tokens)
+                {
+                    if (int.TryParse(token, out int num))
+                    {
+                        numbers.Add(num);
+                    }
+                }
+            }
+
+            int index = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    matrix[i, j] = index < numbers.Count ? numbers[index++] : 0;
+                }
+            }
+        }
+        catch
+        {
+            Console.WriteLine("Файл не читается :((((((");
+        }
+        return matrix;
+    }
+
+    public static void PrintMatrix(int[,] matrix)
+    {
+        Console.Write("   ");
+        foreach (var name in VertexNames)
+        {
+            Console.Write(name.PadLeft(3));
+        }
+        Console.WriteLine();
+
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write(VertexNames[i] + " ");
+            for (int j = 0; j < 10; j++)
+            {
+                Console.Write(matrix[i, j].ToString().PadLeft(3));
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.WriteLine("Имя файла:");
+            string fileName = Console.ReadLine().Trim();
+            int[,] matrix = GraphProgram.GetMatrixFromFile(fileName);
+
+            Console.WriteLine("\nМатрица");
+            GraphProgram.PrintMatrix(matrix);
+
+            Console.WriteLine("\nАлгоритм Прима");
+            Prima prima = new Prima();
+            prima.PrimMST(matrix);
+        }
     }
 }
