@@ -1,335 +1,239 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Linq;
 using _10labLib;
 
-namespace ProductionApp
+class Program
 {
-    using _10labLib;
-    using MyCollections;
-
-    class Program
+    static void Main()
     {
-        // Обобщённая коллекция: ключ – название корпорации, значение – список филиалов (каждый филиал – коллекция Production)
-        static SortedDictionary<string, List<Production>> corporationCollection = new SortedDictionary<string, List<Production>>();
+        // 1. Создание обобщенной коллекции
+        SortedDictionary<string, List<Production>> corporations = new SortedDictionary<string, List<Production>>();
 
-        static void Main(string[] args)
+        // Заполнение данными
+        Random rand = new Random();
+        for (int i = 1; i <= 3; i++)
         {
-            // Заполнение коллекции данными
-            FillCollections();
-
-            // Демонстрация запросов – каждый запрос выполняется двумя способами
-            Console.WriteLine("------ Запрос 1: Выборка данных ------");
-            QuerySelectionUsingLINQ("Corporation_1");
-            QuerySelectionUsingMethods("Corporation_1");
-
-            Console.WriteLine("------ Запрос 2: Получение счетчика ------");
-            QueryCountUsingLINQ(50);
-            QueryCountUsingMethods(50);
-
-            Console.WriteLine("------ Запрос 3: Операции над множествами ------");
-            QuerySetOperationsUsingLINQ();
-            QuerySetOperationsUsingMethods();
-
-            Console.WriteLine("------ Запрос 4: Агрегирование данных ------");
-            QueryAggregationUsingLINQ();
-            QueryAggregationUsingMethods();
-
-            Console.WriteLine("------ Запрос 5: Группировка данных ------");
-            QueryGroupingUsingLINQ();
-            QueryGroupingUsingMethods();
-
-            // ===================================
-            // Часть 2: Работа с MyNewCollection (двунаправленный список)
-            // ===================================
-            Console.WriteLine("\n------ Часть 2: MyNewCollection и методы расширения ------");
-            // Пример заполнения коллекции
-            MyNewCollection<int> intCollection = new MyNewCollection<int>();
-            intCollection.Add(10);
-            intCollection.Add(5);
-            intCollection.Add(15);
-            intCollection.Add(20);
-            intCollection.Add(3);
-
-            // a) Выборка данных по условию (например, выбрать четные числа)
-            var filtered = intCollection.WhereEx(x => x % 2 == 0);
-            Console.WriteLine("Элементы, удовлетворяющие условию (четные): " + string.Join(", ", filtered));
-
-            // b) Агрегирование данных (сумма, минимум, максимум, среднее)
-            Console.WriteLine("Сумма: " + intCollection.AggregateEx((x, y) => x + y));
-            Console.WriteLine("Минимум: " + intCollection.Min());
-            Console.WriteLine("Максимум: " + intCollection.Max());
-            Console.WriteLine("Среднее: " + intCollection.Average());
-
-            // c) Сортировка коллекции (по возрастанию)
-            var sortedAsc = intCollection.SortEx(true);
-            Console.WriteLine("Отсортировано по возрастанию: " + string.Join(", ", sortedAsc));
-            // сортировка по убыванию
-            var sortedDesc = intCollection.SortEx(false);
-            Console.WriteLine("Отсортировано по убыванию: " + string.Join(", ", sortedDesc));
-
-            Console.ReadLine();
-        }
-
-        // Метод заполнения коллекции корпораций и филиалов данными
-        static void FillCollections()
-        {
-            // Для примера создаём две корпорации, каждая с несколькими филиалами,
-            // где в филиалах хранятся объекты разных типов (Factory, Gild, Workshop)
-
-            for (int corp = 1; corp <= 3; corp++)
+            List<Production> branches = new List<Production>();
+            for (int j = 0; j < 3; j++)
             {
-                List<Production> branch = new List<Production>();
-                // Добавляем фабрику
-                branch.Add(new Factory($"Factory_{corp}", new Random().Next(50, 150), new Random().Next(1, 5)));
-                // Добавляем цех (Workshop)
-                branch.Add(new Workshop($"Workshop_{corp}_A", new Random().Next(10, 100), new List<string> { "Drill", "Hammer" }));
-                branch.Add(new Workshop($"Workshop_{corp}_B", new Random().Next(10, 100), new List<string> { "Saw", "Wrench" }));
-                // Добавляем цех (Gild) – в данном примере для разнообразия
-                branch.Add(new Gild($"Gild_{corp}", new Random().Next(5, 50), $"Supervisor_{corp}"));
-
-                corporationCollection.Add($"Corporation_{corp}", branch);
+                Production branch;
+                switch (rand.Next(3))
+                {
+                    case 0:
+                        branch = new Factory();
+                        break;
+                    case 1:
+                        branch = new Gild();
+                        break;
+                    default:
+                        branch = new Workshop();
+                        break;
+                }
+                branch.RandomInit();
+                branches.Add(branch);
             }
+            corporations.Add($"Corp{i}", branches);
         }
 
-        // =========================
-        // Запрос 1: Выборка данных
-        // Пример: Получить наименования всех цехов (Workshop) заданной корпорации
-        // Реализация с использованием LINQ-запроса
-        static void QuerySelectionUsingLINQ(string corpKey)
+        // Выполнение запросов
+        Console.WriteLine("Запрос 1 (LINQ):");
+        ExecuteSelectQueryWithLinq(corporations);
+        Console.WriteLine("\nЗапрос 1 (Методы):");
+        ExecuteSelectQueryWithMethods(corporations);
+
+        // Остальные запросы аналогично...
+    }
+
+    // 1a. Выборка данных: Фабрики с числом цехов > 3
+    static void ExecuteSelectQueryWithLinq(SortedDictionary<string, List<Production>> corps)
+    {
+        var query = from corp in corps
+                    from branch in corp.Value
+                    where branch is Factory f && f.GildCount > 3
+                    select branch;
+        foreach (var item in query)
+            item.Show();
+    }
+
+    static void ExecuteSelectQueryWithMethods(SortedDictionary<string, List<Production>> corps)
+    {
+        var query = corps.SelectMany(c => c.Value)
+                        .OfType<Factory>()
+                        .Where(f => f.GildCount > 3);
+        foreach (var item in query)
+            item.Show();
+    }
+
+    // 2. Счетчик цехов с руководителем
+    static void ExecuteCountQueryWithLinq(SortedDictionary<string, List<Production>> corps, string supervisor)
+    {
+        int count = (from corp in corps
+                     from branch in corp.Value
+                     where branch is Gild g && g.Supervisor == supervisor
+                     select branch).Count();
+        Console.WriteLine($"Count: {count}");
+    }
+
+    static void ExecuteCountQueryWithMethods(SortedDictionary<string, List<Production>> corps, string supervisor)
+    {
+        int count = corps.SelectMany(c => c.Value)
+                        .OfType<Gild>()
+                        .Count(g => g.Supervisor == supervisor);
+        Console.WriteLine($"Count: {count}");
+    }
+
+    // 3. Операции над множествами: Объединение двух корпораций
+    static void ExecuteUnionQuery(SortedDictionary<string, List<Production>> corps, string corp1, string corp2)
+    {
+        var list1 = corps[corp1];
+        var list2 = corps[corp2];
+        var union = list1.Union(list2);
+        foreach (var item in union)
+            item.Show();
+    }
+
+    // 4. Агрегирование: Сумма сотрудников
+    static void ExecuteSumQueryWithLinq(SortedDictionary<string, List<Production>> corps)
+    {
+        int sum = (from corp in corps
+                   from branch in corp.Value
+                   select branch.EmployeeCount).Sum();
+        Console.WriteLine($"Total employees: {sum}");
+    }
+
+    static void ExecuteSumQueryWithMethods(SortedDictionary<string, List<Production>> corps)
+    {
+        int sum = corps.SelectMany(c => c.Value)
+                      .Sum(b => b.EmployeeCount);
+        Console.WriteLine($"Total employees: {sum}");
+    }
+
+    // 5. Группировка по типу
+    static void ExecuteGroupQueryWithLinq(SortedDictionary<string, List<Production>> corps)
+    {
+        var groups = from branch in corps.SelectMany(c => c.Value)
+                     group branch by branch.GetType().Name into g
+                     select new { Type = g.Key, Count = g.Count() };
+        foreach (var g in groups)
+            Console.WriteLine($"{g.Type}: {g.Count}");
+    }
+
+    static void ExecuteGroupQueryWithMethods(SortedDictionary<string, List<Production>> corps)
+    {
+        var groups = corps.SelectMany(c => c.Value)
+                          .GroupBy(b => b.GetType().Name)
+                          .Select(g => new { Type = g.Key, Count = g.Count() });
+        foreach (var g in groups)
+            Console.WriteLine($"{g.Type}: {g.Count}");
+    }
+}
+public class DoublyLinkedList<T>
+{
+    public class Node
+    {
+        public T Value;
+        public Node Next;
+        public Node Prev;
+
+        public Node(T value)
         {
-            if (corporationCollection.TryGetValue(corpKey, out List<Production> branch))
-            {
-                var workshopNames = from p in branch
-                                    where p is Workshop
-                                    select p.Name;
-                Console.WriteLine($"[LINQ] Цеха в {corpKey}: {string.Join(", ", workshopNames)}");
-            }
+            Value = value;
         }
+    }
 
-        // Реализация с использованием методов расширения
-        static void QuerySelectionUsingMethods(string corpKey)
+    public Node Head { get; private set; }
+    public Node Tail { get; private set; }
+
+    public Node First { get { return Head; } }
+    public Node Last { get { return Tail; } }
+
+    public void AddLast(T value)
+    {
+        Node newNode = new Node(value);
+        if (Head == null)
         {
-            if (corporationCollection.TryGetValue(corpKey, out List<Production> branch))
-            {
-                var workshopNames = branch.Where(p => p is Workshop)
-                                          .Select(p => p.Name);
-                Console.WriteLine($"[Методы расширения] Цеха в {corpKey}: {string.Join(", ", workshopNames)}");
-            }
+            Head = newNode;
+            Tail = newNode;
         }
-
-        // =========================
-        // Запрос 2: Получение счетчика (например, количество объектов с EmployeeCount больше заданного значения)
-        static void QueryCountUsingLINQ(int threshold)
+        else
         {
-            int count = (from corp in corporationCollection.Values
-                         from p in corp
-                         where p.EmployeeCount > threshold
-                         select p).Count();
-            Console.WriteLine($"[LINQ] Количество объектов с числом сотрудников > {threshold}: {count}");
+            Tail.Next = newNode;
+            newNode.Prev = Tail;
+            Tail = newNode;
         }
+    }
 
-        static void QueryCountUsingMethods(int threshold)
+    public void InsertAfter(Node node, T value)
+    {
+        if (node == null) return;
+
+        Node newNode = new Node(value)
         {
-            int count = corporationCollection.Values.SelectMany(p => p)
-                                                      .Count(p => p.EmployeeCount > threshold);
-            Console.WriteLine($"[Методы расширения] Количество объектов с числом сотрудников > {threshold}: {count}");
-        }
-
-        // =========================
-        // Запрос 3: Операции над множествами (пересечение, объединение, разность)
-        // Пример: Пусть у нас есть две выборки из разных корпораций – выполним пересечение по наименованиям объектов.
-        static void QuerySetOperationsUsingLINQ()
+            Next = node.Next,
+            Prev = node
+        };
+        if (node.Next != null)
         {
-            // Для примера выбираем корпорации 1 и 2
-            if (corporationCollection.TryGetValue("Corporation_1", out List<Production> branch1) &&
-                corporationCollection.TryGetValue("Corporation_2", out List<Production> branch2))
-            {
-                var names1 = (from p in branch1 select p.Name).ToList();
-                var names2 = (from p in branch2 select p.Name).ToList();
-                var intersection = names1.Intersect(names2);
-                Console.WriteLine("[LINQ] Пересечение наименований из Corporation_1 и Corporation_2: " + string.Join(", ", intersection));
-            }
+            node.Next.Prev = newNode;
         }
-
-        static void QuerySetOperationsUsingMethods()
+        else
         {
-            if (corporationCollection.TryGetValue("Corporation_1", out List<Production> branch1) &&
-                corporationCollection.TryGetValue("Corporation_2", out List<Production> branch2))
-            {
-                var names1 = branch1.Select(p => p.Name);
-                var names2 = branch2.Select(p => p.Name);
-                var union = names1.Union(names2);
-                var difference = names1.Except(names2);
-                Console.WriteLine("[Методы расширения] Объединение наименований: " + string.Join(", ", union));
-                Console.WriteLine("[Методы расширения] Разность наименований (Corporation_1 - Corporation_2): " + string.Join(", ", difference));
-            }
+            Tail = newNode;
         }
+        node.Next = newNode;
+    }
 
-        // =========================
-        // Запрос 4: Агрегирование данных (например, суммарное количество сотрудников во всех филиалах)
-        static void QueryAggregationUsingLINQ()
-        {
-            var totalEmployees = (from corp in corporationCollection.Values
-                                  from p in corp
-                                  select p.EmployeeCount).Sum();
-            Console.WriteLine("[LINQ] Общее количество сотрудников: " + totalEmployees);
-        }
-
-        static void QueryAggregationUsingMethods()
-        {
-            var totalEmployees = corporationCollection.Values.SelectMany(p => p)
-                                                               .Select(p => p.EmployeeCount)
-                                                               .Sum();
-            Console.WriteLine("[Методы расширения] Общее количество сотрудников: " + totalEmployees);
-        }
-
-        // =========================
-        // Запрос 5: Группировка данных
-        // Пример: Группировать объекты по типу
-        static void QueryGroupingUsingLINQ()
-        {
-            var groups = from corp in corporationCollection.Values
-                         from p in corp
-                         group p by p.GetType().Name into g
-                         select new { Type = g.Key, Count = g.Count() };
-
-            Console.WriteLine("[LINQ] Группировка по типу объектов:");
-            foreach (var group in groups)
-            {
-                Console.WriteLine($"  {group.Type}: {group.Count}");
-            }
-        }
-
-        static void QueryGroupingUsingMethods()
-        {
-            var groups = corporationCollection.Values.SelectMany(p => p)
-                        .GroupBy(p => p.GetType().Name)
-                        .Select(g => new { Type = g.Key, Count = g.Count() });
-
-            Console.WriteLine("[Методы расширения] Группировка по типу объектов:");
-            foreach (var group in groups)
-            {
-                Console.WriteLine($"  {group.Type}: {group.Count}");
-            }
-        }
+    public void Clear()
+    {
+        Head = null;
+        Tail = null;
     }
 }
 
-// ===================================
-// Часть 2: MyNewCollection и методы расширения
-// ===================================
-
-namespace MyCollections
+public static class DoublyLinkedListExtensions
 {
-    using System.Collections;
-    using System.Collections.Generic;
-
-    // Простой класс двунаправленного списка
-    public class MyNewCollection<T> : IEnumerable<T>
+    // 1. Выборка данных по условию
+    public static IEnumerable<Production> Where(this DoublyLinkedList<Production> list, Func<Production, bool> predicate)
     {
-        // Вложенный класс узла
-        public class Node
+        var current = list.First;
+        while (current != null)
         {
-            public T Data { get; set; }
-            public Node Next { get; set; }
-            public Node Prev { get; set; }
-            public Node(T data)
-            {
-                Data = data;
-            }
-        }
-
-        private Node head;
-        private Node tail;
-        public int Count { get; private set; }
-
-        // Добавление элемента в конец списка
-        public void Add(T item)
-        {
-            Node newNode = new Node(item);
-            if (head == null)
-            {
-                head = newNode;
-                tail = newNode;
-            }
-            else
-            {
-                tail.Next = newNode;
-                newNode.Prev = tail;
-                tail = newNode;
-            }
-            Count++;
-        }
-
-        // Реализация перечислителя для поддержки IEnumerable
-        public IEnumerator<T> GetEnumerator()
-        {
-            Node current = head;
-            while (current != null)
-            {
-                yield return current.Data;
-                current = current.Next;
-            }
-        }
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        // Метод для получения элементов в виде списка (для удобства сортировки, преобразования и т.д.)
-        public List<T> ToList()
-        {
-            List<T> list = new List<T>();
-            foreach (var item in this)
-                list.Add(item);
-            return list;
-        }
-
-        // Метод очистки коллекции (если потребуется)
-        public void Clear()
-        {
-            head = tail = null;
-            Count = 0;
+            if (predicate(current.Value))
+                yield return current.Value;
+            current = current.Next;
         }
     }
 
-    // Методы расширения для MyNewCollection
-    public static class MyNewCollectionExtensions
+    // 2. Агрегирование: Среднее количество сотрудников
+    public static double AverageEmployeeCount(this DoublyLinkedList<Production> list)
     {
-        // a) Выборка данных по условию – аналог стандартного Where
-        public static IEnumerable<T> WhereEx<T>(this MyNewCollection<T> collection, Func<T, bool> predicate)
+        if (list.First == null) return 0;
+        int sum = 0, count = 0;
+        var current = list.First;
+        while (current != null)
         {
-            foreach (T item in collection)
-            {
-                if (predicate(item))
-                    yield return item;
-            }
+            sum += current.Value.EmployeeCount;
+            count++;
+            current = current.Next;
         }
+        return (double)sum / count;
+    }
 
-        // b) Агрегирование данных: реализуем метод AggregateEx, похожий на метод Aggregate LINQ
-        public static T AggregateEx<T>(this MyNewCollection<T> collection, Func<T, T, T> func)
+    // 3. Сортировка по возрастанию/убыванию
+    public static IEnumerable<Production> OrderByEmployeeCount(this DoublyLinkedList<Production> list, bool ascending = true)
+    {
+        var comparer = Comparer<Production>.Create((x, y) => x.EmployeeCount.CompareTo(y.EmployeeCount));
+        var sortedList = new List<Production>();
+        var current = list.First;
+        while (current != null)
         {
-            IEnumerator<T> enumerator = collection.GetEnumerator();
-            if (!enumerator.MoveNext())
-                throw new InvalidOperationException("Коллекция пуста");
-            T result = enumerator.Current;
-            while (enumerator.MoveNext())
-            {
-                result = func(result, enumerator.Current);
-            }
-            return result;
+            sortedList.Add(current.Value);
+            current = current.Next;
         }
-
-        // c) Сортировка коллекции – возвращаем отсортированный список, можно задать направление сортировки
-        public static List<T> SortEx<T>(this MyNewCollection<T> collection, bool ascending = true)
-        {
-            List<T> list = collection.ToList();
-            if (ascending)
-                list.Sort();
-            else
-                list.Sort((x, y) => Comparer<T>.Default.Compare(y, x));
-            return list;
-        }
+        sortedList.Sort(comparer);
+        if (!ascending)
+            sortedList.Reverse();
+        return sortedList;
     }
 }
