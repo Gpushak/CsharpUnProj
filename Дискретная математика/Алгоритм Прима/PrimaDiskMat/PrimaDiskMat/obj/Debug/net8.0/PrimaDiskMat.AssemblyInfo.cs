@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PrimaDiskMat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63c2829b987b9c0b7b221bac032136a9c4584685")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cbc3b8b4d87235d2c7e395028b967f5ecd129fc6")]
 [assembly: System.Reflection.AssemblyProductAttribute("PrimaDiskMat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PrimaDiskMat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
