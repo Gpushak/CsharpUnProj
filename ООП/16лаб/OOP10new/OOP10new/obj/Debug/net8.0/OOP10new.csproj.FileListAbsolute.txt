@@ -1,0 +1,47 @@
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.AssemblyInfoInputs.cache
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.AssemblyInfo.cs
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.csproj.CoreCompileInputs.cache
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.exe
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.deps.json
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.runtimeconfig.json
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.dll
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.pdb
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.dll
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\refint\OOP10new.dll
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.pdb
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.genruntimeconfig.cache
+C:\Users\UndeaD\source\repos\OOP10new\OOP10new\obj\Debug\net8.0\ref\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.exe
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.deps.json
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.runtimeconfig.json
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.AssemblyInfoInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.AssemblyInfo.cs
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.csproj.CoreCompileInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\refint\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.genruntimeconfig.cache
+C:\Users\igleb\OneDrive\Рабочий стол\OOP10new\OOP10new\obj\Debug\net8.0\ref\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.exe
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.deps.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.runtimeconfig.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\bin\Debug\net8.0\OOP10new.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\bin\Debug\net8.0\10labLib.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\bin\Debug\net8.0\10labLib.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.csproj.AssemblyReference.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.AssemblyInfoInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.AssemblyInfo.cs
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.csproj.CoreCompileInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.sourcelink.json
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.csproj.Up2Date
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\refint\OOP10new.dll
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\OOP10new.genruntimeconfig.cache
+C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\16лаб\OOP10new\OOP10new\obj\Debug\net8.0\ref\OOP10new.dll

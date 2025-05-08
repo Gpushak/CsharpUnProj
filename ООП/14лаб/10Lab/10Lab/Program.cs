@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using _10labLib;
+
+
 public class DoublyLinkedList<T>
 {
     public class Node
@@ -9,243 +11,193 @@ public class DoublyLinkedList<T>
         public T Value;
         public Node Next;
         public Node Prev;
-
-        public Node(T value) => Value = value;
+        public Node(T value) { Value = value; }
     }
-
     public Node Head { get; private set; }
     public Node Tail { get; private set; }
-
     public Node First => Head;
     public Node Last => Tail;
-
     public void AddLast(T value)
     {
-        Node newNode = new Node(value);
-        if (Head == null)
-        {
-            Head = Tail = newNode;
-        }
-        else
-        {
-            Tail.Next = newNode;
-            newNode.Prev = Tail;
-            Tail = newNode;
-        }
+        var newNode = new Node(value);
+        if (Head == null) Head = Tail = newNode;
+        else { Tail.Next = newNode; newNode.Prev = Tail; Tail = newNode; }
     }
-
     public void InsertAfter(Node node, T value)
     {
         if (node == null) return;
-
-        Node newNode = new Node(value)
-        {
-            Next = node.Next,
-            Prev = node
-        };
-
-        if (node.Next != null)
-            node.Next.Prev = newNode;
-        else
-            Tail = newNode;
-
+        var newNode = new Node(value) { Next = node.Next, Prev = node };
+        if (node.Next != null) node.Next.Prev = newNode;
+        else Tail = newNode;
         node.Next = newNode;
     }
+    public void Clear() { Head = Tail = null; }
+}
 
-    public void Clear()
+// Методы расширения для DoublyLinkedList
+public static class DoublyLinkedListExtensions
+{
+    // Выборка
+    public static IEnumerable<T> Where<T>(this DoublyLinkedList<T> list, Func<T, bool> predicate)
     {
-        Head = Tail = null;
+        for (var node = list.First; node != null; node = node.Next)
+            if (predicate(node.Value)) yield return node.Value;
+    }
+    // Агрегация
+    public static int Sum<T>(this DoublyLinkedList<T> list, Func<T, int> selector)
+    {
+        int sum = 0;
+        foreach (var val in list.Where(x => true)) sum += selector(val);
+        return sum;
+    }
+    public static double Average<T>(this DoublyLinkedList<T> list, Func<T, int> selector)
+    {
+        var vals = list.Where(x => true).Select(selector).ToArray();
+        return vals.Any() ? vals.Average() : 0;
+    }
+    public static int Min<T>(this DoublyLinkedList<T> list, Func<T, int> selector)
+    {
+        return list.Where(x => true).Select(selector).Min();
+    }
+    public static int Max<T>(this DoublyLinkedList<T> list, Func<T, int> selector)
+    {
+        return list.Where(x => true).Select(selector).Max();
+    }
+    // Сортировка
+    public static IEnumerable<T> OrderBy<T, TKey>(this DoublyLinkedList<T> list, Func<T, TKey> keySelector)
+        where TKey : IComparable
+    {
+        return list.Where(x => true).OrderBy(keySelector);
+    }
+    public static IEnumerable<T> OrderByDescending<T, TKey>(this DoublyLinkedList<T> list, Func<T, TKey> keySelector)
+        where TKey : IComparable
+    {
+        return list.Where(x => true).OrderByDescending(keySelector);
     }
 }
 
 class Program
 {
-
     static void Main()
     {
-        // Часть 1: Создание и заполнение коллекции
-        SortedDictionary<string, List<Production>> corporations = new SortedDictionary<string, List<Production>>();
+        // Часть 1: Стандартная коллекция содержащая другие коллекции
+        var corp = new Dictionary<string, List<Production>>();
+        // Заполняем коллекции
+        corp["Factories"] = new List<Production>();
+        corp["Gilds"] = new List<Production>();
+        corp["Workshops"] = new List<Production>();
+        // Создаем по 3 элемента каждой категории
+        for (int i = 0; i < 3; i++) { var f = new Factory(); f.RandomInit(); corp["Factories"].Add(f); }
+        for (int i = 0; i < 3; i++) { var g = new Gild(); g.RandomInit(); corp["Gilds"].Add(g); }
+        for (int i = 0; i < 3; i++) { var w = new Workshop(); w.RandomInit(); corp["Workshops"].Add(w); }
 
-        Random rand = new Random();
-        string[] corpNames = { "AlphaCorp", "BetaGroup", "GammaInc" };
-        foreach (var corpName in corpNames)
+        // Вызов запросов
+        QuerySelectionLINQ(corp);
+        QuerySelectionExt(corp);
+        QueryCountLINQ(corp);
+        QueryCountExt(corp);
+        QuerySetOpsLINQ(corp);
+        QuerySetOpsExt(corp);
+        QueryAggregateLINQ(corp);
+        QueryAggregateExt(corp);
+        QueryGroupLINQ(corp);
+        QueryGroupExt(corp);
+
+        // Часть 2: Тест методов расширения
+        var list = new DoublyLinkedList<Production>();
+        for (int i = 0; i < 5; i++) { var p = new Production(); p.RandomInit(); list.AddLast(p); }
+        Console.WriteLine("\nВыборка EmployeeCount > 50:");
+        foreach (var p in list.Where(p => p.EmployeeCount > 50)) p.Show();
+        Console.WriteLine($"Sum Employees: {list.Sum(p => p.EmployeeCount)}");
+        Console.WriteLine($"Avg Employees: {list.Average(p => p.EmployeeCount):F2}");
+        Console.WriteLine("Sorted by Employees asc:");
+        foreach (var p in list.OrderBy(p => p.EmployeeCount)) p.Show();
+    }
+
+    // 1.a Выборка LINQ
+    static void QuerySelectionLINQ(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nLINQ Selection: Factories with >50 employees");
+        var result = from list in corp["Factories"]
+                     where list.EmployeeCount > 50
+                     select list;
+        foreach (var p in result) p.Show();
+    }
+    // 1.a Выборка Ext
+    static void QuerySelectionExt(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nExt Selection: Gilds supervised 'Supervisor_50'");
+        var result = corp["Gilds"].Where(g => ((Gild)g).Supervisor == "Supervisor_50");
+        foreach (var p in result) p.Show();
+    }
+    // 1.b Count LINQ
+    static void QueryCountLINQ(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nLINQ Count: Workshops with equipment >2");
+        var count = (from w in corp["Workshops"]
+                     where ((Workshop)w).Equipment.Count > 2
+                     select w).Count();
+        Console.WriteLine(count);
+    }
+    // 1.b Count Ext
+    static void QueryCountExt(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nExt Count: total employees in all Factories");
+        var count = corp["Factories"].Sum(f => f.EmployeeCount);
+        Console.WriteLine(count);
+    }
+    // 1.c SetOps LINQ
+    static void QuerySetOpsLINQ(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nLINQ SetOps: intersection Factories and Gilds by employeeCount");
+        var a = corp["Factories"].Select(f => f.EmployeeCount);
+        var b = corp["Gilds"].Select(g => g.EmployeeCount);
+        var inter = a.Intersect(b);
+        Console.WriteLine(string.Join(",", inter));
+    }
+    // 1.c SetOps Ext
+    static void QuerySetOpsExt(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nExt SetOps: union Workshops and Gilds by employeeCount");
+        var a = corp["Workshops"].Select(w => w.EmployeeCount);
+        var b = corp["Gilds"].Select(g => g.EmployeeCount);
+        var uni = a.Union(b);
+        Console.WriteLine(string.Join(",", uni));
+    }
+    // 1.d Aggregate LINQ
+    static void QueryAggregateLINQ(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nLINQ Aggregate: avg employees across all collections");
+        var all = corp.Values.SelectMany(x => x).Select(p => p.EmployeeCount);
+        Console.WriteLine(all.Average());
+    }
+    // 1.d Aggregate Ext
+    static void QueryAggregateExt(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nExt Aggregate: max employees in any collection");
+        var all = corp.Values.SelectMany(x => x).Select(p => p.EmployeeCount);
+        Console.WriteLine(all.Max());
+    }
+    // 1.e Group LINQ
+    static void QueryGroupLINQ(Dictionary<string, List<Production>> corp)
+    {
+        Console.WriteLine("\nLINQ Group: group by type");
+        var all = corp.Values.SelectMany(x => x);
+        var grouped = from p in all
+                      group p by p.GetType().Name into g
+                      select g;
+        foreach (var g in grouped)
         {
-            List<Production> branches = new List<Production>();
-            for (int j = 0; j < 4; j++) // Добавляем по 4 элемента в каждую корпорацию
-            {
-                Production branch;
-                switch (rand.Next(3))
-                {
-                    case 0:
-                        branch = new Factory();
-                        ((Factory)branch).GildCount = rand.Next(1, 10); // Явное задание параметров
-                        break;
-                    case 1:
-                        branch = new Gild();
-                        ((Gild)branch).Supervisor = $"Supervisor_{rand.Next(1, 50)}";
-                        break;
-                    default:
-                        branch = new Workshop();
-                        ((Workshop)branch).Equipment = Enumerable.Range(1, 3)
-                            .Select(n => $"Equipment_{rand.Next(100)}").ToList();
-                        break;
-                }
-                branch.Name = $"{corpName}_Branch{j + 1}";
-                branch.EmployeeCount = rand.Next(10, 1000);
-                branches.Add(branch);
-            }
-            corporations.Add(corpName, branches);
-        }
-
-        // Часть 1: Выполнение всех запросов
-        Console.WriteLine("=== ЗАПРОС 1: Фабрики с более чем 5 цехами (LINQ) ===");
-        ExecuteSelectQueryWithLinq(corporations);
-
-        Console.WriteLine("\n=== ЗАПРОС 2: Количество цехов с руководителем 'Supervisor_5' (LINQ) ===");
-        ExecuteCountQueryWithLinq(corporations, "Supervisor_5");
-
-        Console.WriteLine("\n=== ЗАПРОС 3: Объединение AlphaCorp и BetaGroup (Методы) ===");
-        ExecuteUnionQuery(corporations, "AlphaCorp", "BetaGroup");
-
-        Console.WriteLine("\n=== ЗАПРОС 4: Сумма сотрудников (LINQ) ===");
-        ExecuteSumQueryWithLinq(corporations);
-
-        Console.WriteLine("\n=== ЗАПРОС 5: Группировка по типу (Методы) ===");
-        ExecuteGroupQueryWithMethods(corporations);
-
-        // Часть 2: Работа с DoublyLinkedList
-        DoublyLinkedList<Production> myList = new DoublyLinkedList<Production>();
-        corporations["AlphaCorp"].ForEach(p => myList.AddLast(p));
-
-        Console.WriteLine("\n=== Методы расширения для DoublyLinkedList ===");
-        Console.WriteLine("Фильтрация: цеха с >500 сотрудниками");
-        var filtered = myList.Where(p => p.EmployeeCount > 500);
-        foreach (var item in filtered) item.Show();
-
-        Console.WriteLine($"\nСреднее сотрудников: {myList.AverageEmployeeCount():F2}");
-        Console.WriteLine("\nСортировка по возрастанию:");
-        foreach (var item in myList.OrderByEmployeeCount())
-            Console.WriteLine($"{item.Name}: {item.EmployeeCount}");
-    }
-
-    #region Часть 1: Реализация всех запросов
-    // 1a. Выборка фабрик с GildCount > 5
-    static void ExecuteSelectQueryWithLinq(SortedDictionary<string, List<Production>> corps)
-    {
-        var query = from corp in corps
-                    from branch in corp.Value
-                    where branch is Factory f && f.GildCount > 5
-                    select branch;
-        foreach (var item in query) item.Show();
-    }
-
-    // 1b. То же через методы расширения
-    static void ExecuteSelectQueryWithMethods(SortedDictionary<string, List<Production>> corps)
-    {
-        var query = corps.SelectMany(c => c.Value)
-                        .OfType<Factory>()
-                        .Where(f => f.GildCount > 5);
-        foreach (var item in query) item.Show();
-    }
-
-    // 2a. Количество цехов с заданным руководителем (LINQ)
-    static void ExecuteCountQueryWithLinq(SortedDictionary<string, List<Production>> corps, string supervisor)
-    {
-        int count = (from corp in corps
-                     from branch in corp.Value
-                     where branch is Gild g && g.Supervisor == supervisor
-                     select branch).Count();
-        Console.WriteLine($"Найдено цехов: {count}");
-    }
-
-    // 2b. Счетчик через методы
-    static void ExecuteCountQueryWithMethods(SortedDictionary<string, List<Production>> corps, string supervisor)
-    {
-        int count = corps.SelectMany(c => c.Value)
-                        .OfType<Gild>()
-                        .Count(g => g.Supervisor == supervisor);
-        Console.WriteLine($"Найдено цехов: {count}");
-    }
-
-    // 3a. Объединение двух корпораций
-    static void ExecuteUnionQuery(SortedDictionary<string, List<Production>> corps, string corp1, string corp2)
-    {
-        var union = corps[corp1].Union(corps[corp2]).Distinct();
-        foreach (var item in union) item.Show();
-    }
-
-    // 4a. Агрегирование: сумма сотрудников (LINQ)
-    static void ExecuteSumQueryWithLinq(SortedDictionary<string, List<Production>> corps)
-    {
-        int sum = (from corp in corps
-                   from branch in corp.Value
-                   select branch.EmployeeCount).Sum();
-        Console.WriteLine($"Всего сотрудников: {sum}");
-    }
-
-    // 4b. Сумма через методы
-    static void ExecuteSumQueryWithMethods(SortedDictionary<string, List<Production>> corps)
-    {
-        int sum = corps.SelectMany(c => c.Value).Sum(b => b.EmployeeCount);
-        Console.WriteLine($"Всего сотрудников: {sum}");
-    }
-
-    // 5a. Группировка по типу (LINQ)
-    static void ExecuteGroupQueryWithLinq(SortedDictionary<string, List<Production>> corps)
-    {
-        var groups = from branch in corps.SelectMany(c => c.Value)
-                     group branch by branch.GetType().Name into g
-                     select new { Type = g.Key, Count = g.Count(), Avg = g.Average(b => b.EmployeeCount) };
-
-        foreach (var g in groups)
-            Console.WriteLine($"{g.Type}: {g.Count} шт., Среднее сотрудников: {g.Avg:F0}");
-    }
-
-    // 5b. Группировка через методы
-    static void ExecuteGroupQueryWithMethods(SortedDictionary<string, List<Production>> corps)
-    {
-        var groups = corps.SelectMany(c => c.Value)
-                        .GroupBy(b => b.GetType().Name)
-                        .Select(g => new {
-                            Type = g.Key,
-                            Count = g.Count(),
-                            Avg = g.Average(b => b.EmployeeCount)
-                        });
-
-        foreach (var g in groups)
-            Console.WriteLine($"{g.Type}: {g.Count} шт., Среднее сотрудников: {g.Avg:F0}");
-    }
-    #endregion
-}
-
-public static class DoublyLinkedListExtensions
-{
-    // 1. Выборка по условию
-    public static IEnumerable<Production> Where(this DoublyLinkedList<Production> list, Func<Production, bool> predicate)
-    {
-        var current = list.First;
-        while (current != null)
-        {
-            if (predicate(current.Value)) yield return current.Value;
-            current = current.Next;
+            Console.WriteLine($"{g.Key}: {g.Count()}");
         }
     }
-
-    // 2. Агрегирование
-    public static int SumEmployeeCount(this DoublyLinkedList<Production> list) =>
-        list.Where(_ => true).Sum(p => p.EmployeeCount);
-
-    public static double AverageEmployeeCount(this DoublyLinkedList<Production> list) =>
-        list.Where(_ => true).Average(p => p.EmployeeCount);
-
-    public static int MaxEmployeeCount(this DoublyLinkedList<Production> list) =>
-        list.Where(_ => true).Max(p => p.EmployeeCount);
-
-    // 3. Сортировка
-    public static IEnumerable<Production> OrderByEmployeeCount(this DoublyLinkedList<Production> list, bool ascending = true)
+    // 1.e Group Ext
+    static void QueryGroupExt(Dictionary<string, List<Production>> corp)
     {
-        return ascending ?
-            list.Where(_ => true).OrderBy(p => p.EmployeeCount) :
-            list.Where(_ => true).OrderByDescending(p => p.EmployeeCount);
+        Console.WriteLine("\nExt Group: group by employee count range");
+        var all = corp.Values.SelectMany(x => x);
+        var grouped = all.GroupBy(p => p.EmployeeCount / 10 * 10);
+        foreach (var g in grouped)
+            Console.WriteLine($"Range {g.Key}-{g.Key + 9}: {g.Count()}");
     }
 }

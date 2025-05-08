@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "OOP10new/1.0.0": {
+        "dependencies": {
+          "10labLib": "1.0.0"
+        },
+        "runtime": {
+          "OOP10new.dll": {}
+        }
+      },
+      "10labLib/1.0.0": {
+        "runtime": {
+          "10labLib.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "OOP10new/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "10labLib/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

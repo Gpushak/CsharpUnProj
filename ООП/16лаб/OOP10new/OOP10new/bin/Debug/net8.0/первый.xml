@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Person xsi:type="Administrator">
+    <FirstName>Татьяна</FirstName>
+    <LastName>Смирнов</LastName>
+    <BirthDate>1964-01-09T00:00:00</BirthDate>
+    <Gender>Ж</Gender>
+    <Position>Аналитик</Position>
+    <Salary>130043</Salary>
+    <HireDate>1995-12-06T00:00:00</HireDate>
+    <Department>Производственный отдел</Department>
+    <SubordinatesCount>9</SubordinatesCount>
+  </Person>
+  <Person xsi:type="Administrator">
+    <FirstName>Иван</FirstName>
+    <LastName>Сидоров</LastName>
+    <BirthDate>2001-01-13T00:00:00</BirthDate>
+    <Gender>М</Gender>
+    <Position>Аналитик</Position>
+    <Salary>164488</Salary>
+    <HireDate>2019-10-05T00:00:00</HireDate>
+    <Department>IT отдел</Department>
+    <SubordinatesCount>18</SubordinatesCount>
+  </Person>
+  <Person xsi:type="Engineer">
+    <FirstName>Ольга</FirstName>
+    <LastName>Петров</LastName>
+    <BirthDate>1983-07-27T00:00:00</BirthDate>
+    <Gender>Ж</Gender>
+    <Position>Менеджер</Position>
+    <Salary>70081</Salary>
+    <HireDate>2024-06-11T00:00:00</HireDate>
+    <Specialization>Базы данных</Specialization>
+    <ProjectsCompleted>27</ProjectsCompleted>
+  </Person>
+  <Person xsi:type="Administrator">
+    <FirstName>Татьяна</FirstName>
+    <LastName>Сидоров</LastName>
+    <BirthDate>1990-08-20T00:00:00</BirthDate>
+    <Gender>Ж</Gender>
+    <Position>Аналитик</Position>
+    <Salary>125234</Salary>
+    <HireDate>2018-09-28T00:00:00</HireDate>
+    <Department>Администрация</Department>
+    <SubordinatesCount>8</SubordinatesCount>
+  </Person>
+  <Person xsi:type="Employee">
+    <FirstName>Дмитрий</FirstName>
+    <LastName>Сидоров</LastName>
+    <BirthDate>1995-01-25T00:00:00</BirthDate>
+    <Gender>М</Gender>
+    <Position>Разработчик</Position>
+    <Salary>183911</Salary>
+    <HireDate>2015-01-20T00:00:00</HireDate>
+  </Person>
+</ArrayOfPerson>

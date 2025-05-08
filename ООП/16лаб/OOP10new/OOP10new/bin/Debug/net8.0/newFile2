@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Person xsi:type="Employee">
+    <FirstName>Анна</FirstName>
+    <LastName>Иванов</LastName>
+    <BirthDate>1964-04-22T00:00:00</BirthDate>
+    <Gender>Ж</Gender>
+    <Position>Дизайнер</Position>
+    <Salary>59584</Salary>
+    <HireDate>1991-02-23T00:00:00</HireDate>
+  </Person>
+</ArrayOfPerson>

@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\16\u043B\u0430\u0431\\OOP10new\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{99BDBD03-AAE5-4FC0-95F8-E5C6F6B7389F}|OOP10new\\OOP10new.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\16\u043B\u0430\u0431\\oop10new\\oop10new\\programm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99BDBD03-AAE5-4FC0-95F8-E5C6F6B7389F}|OOP10new\\OOP10new.csproj|solutionrelative:oop10new\\programm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99BDBD03-AAE5-4FC0-95F8-E5C6F6B7389F}|OOP10new\\OOP10new.csproj|c:\\users\\igleb\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\csharpunproj\\\u043E\u043E\u043F\\16\u043B\u0430\u0431\\oop10new\\oop10new\\oop10new.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{99BDBD03-AAE5-4FC0-95F8-E5C6F6B7389F}|OOP10new\\OOP10new.csproj|solutionrelative:oop10new\\oop10new.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OOP10new.csproj",
+              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\16\u043B\u0430\u0431\\OOP10new\\OOP10new\\OOP10new.csproj",
+              "RelativeDocumentMoniker": "OOP10new\\OOP10new.csproj",
+              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\16\u043B\u0430\u0431\\OOP10new\\OOP10new\\OOP10new.csproj",
+              "RelativeToolTip": "OOP10new\\OOP10new.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-06T15:18:38.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Programm.cs",
+              "DocumentMoniker": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\16\u043B\u0430\u0431\\OOP10new\\OOP10new\\Programm.cs",
+              "RelativeDocumentMoniker": "OOP10new\\Programm.cs",
+              "ToolTip": "C:\\Users\\igleb\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\CsharpUnProj\\\u041E\u041E\u041F\\16\u043B\u0430\u0431\\OOP10new\\OOP10new\\Programm.cs",
+              "RelativeToolTip": "OOP10new\\Programm.cs",
+              "ViewState": "AQIAACwBAAAAAAAAAAAAABYAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T05:28:10.019Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
