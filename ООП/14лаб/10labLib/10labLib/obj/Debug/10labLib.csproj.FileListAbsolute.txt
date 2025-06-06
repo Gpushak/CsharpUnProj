@@ -4,3 +4,9 @@ C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\10лаб\10l
 C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\10лаб\10labLib\10labLib\obj\Debug\10labLib.csproj.CoreCompileInputs.cache
 C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\10лаб\10labLib\10labLib\obj\Debug\10labLib.dll
 C:\Users\igleb\OneDrive\Рабочий стол\CsharpUnProj\ООП\10лаб\10labLib\10labLib\obj\Debug\10labLib.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\14лаб\10labLib\10labLib\bin\Debug\10labLib.dll
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\14лаб\10labLib\10labLib\bin\Debug\10labLib.pdb
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\14лаб\10labLib\10labLib\obj\Debug\10labLib.csproj.AssemblyReference.cache
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\14лаб\10labLib\10labLib\obj\Debug\10labLib.csproj.CoreCompileInputs.cache
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\14лаб\10labLib\10labLib\obj\Debug\10labLib.dll
+C:\Users\igleb\OneDrive\Рабочий стол\C#_Un_Proj\CsharpUnProj\ООП\14лаб\10labLib\10labLib\obj\Debug\10labLib.pdb

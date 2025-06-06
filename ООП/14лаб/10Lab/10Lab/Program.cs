@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using _10labLib;
 
-
 public class DoublyLinkedList<T>
 {
     public class Node
@@ -37,13 +36,11 @@ public class DoublyLinkedList<T>
 // Методы расширения для DoublyLinkedList
 public static class DoublyLinkedListExtensions
 {
-    // Выборка
     public static IEnumerable<T> Where<T>(this DoublyLinkedList<T> list, Func<T, bool> predicate)
     {
         for (var node = list.First; node != null; node = node.Next)
             if (predicate(node.Value)) yield return node.Value;
     }
-    // Агрегация
     public static int Sum<T>(this DoublyLinkedList<T> list, Func<T, int> selector)
     {
         int sum = 0;
@@ -63,7 +60,6 @@ public static class DoublyLinkedListExtensions
     {
         return list.Where(x => true).Select(selector).Max();
     }
-    // Сортировка
     public static IEnumerable<T> OrderBy<T, TKey>(this DoublyLinkedList<T> list, Func<T, TKey> keySelector)
         where TKey : IComparable
     {
@@ -80,18 +76,15 @@ class Program
 {
     static void Main()
     {
-        // Часть 1: Стандартная коллекция содержащая другие коллекции
         var corp = new Dictionary<string, List<Production>>();
-        // Заполняем коллекции
         corp["Factories"] = new List<Production>();
         corp["Gilds"] = new List<Production>();
         corp["Workshops"] = new List<Production>();
-        // Создаем по 3 элемента каждой категории
+
         for (int i = 0; i < 3; i++) { var f = new Factory(); f.RandomInit(); corp["Factories"].Add(f); }
         for (int i = 0; i < 3; i++) { var g = new Gild(); g.RandomInit(); corp["Gilds"].Add(g); }
         for (int i = 0; i < 3; i++) { var w = new Workshop(); w.RandomInit(); corp["Workshops"].Add(w); }
 
-        // Вызов запросов
         QuerySelectionLINQ(corp);
         QuerySelectionExt(corp);
         QueryCountLINQ(corp);
@@ -103,7 +96,6 @@ class Program
         QueryGroupLINQ(corp);
         QueryGroupExt(corp);
 
-        // Часть 2: Тест методов расширения
         var list = new DoublyLinkedList<Production>();
         for (int i = 0; i < 5; i++) { var p = new Production(); p.RandomInit(); list.AddLast(p); }
         Console.WriteLine("\nВыборка EmployeeCount > 50:");
@@ -114,7 +106,6 @@ class Program
         foreach (var p in list.OrderBy(p => p.EmployeeCount)) p.Show();
     }
 
-    // 1.a Выборка LINQ
     static void QuerySelectionLINQ(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nLINQ Selection: Factories with >50 employees");
@@ -123,14 +114,12 @@ class Program
                      select list;
         foreach (var p in result) p.Show();
     }
-    // 1.a Выборка Ext
     static void QuerySelectionExt(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nExt Selection: Gilds supervised 'Supervisor_50'");
         var result = corp["Gilds"].Where(g => ((Gild)g).Supervisor == "Supervisor_50");
         foreach (var p in result) p.Show();
     }
-    // 1.b Count LINQ
     static void QueryCountLINQ(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nLINQ Count: Workshops with equipment >2");
@@ -139,14 +128,12 @@ class Program
                      select w).Count();
         Console.WriteLine(count);
     }
-    // 1.b Count Ext
     static void QueryCountExt(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nExt Count: total employees in all Factories");
         var count = corp["Factories"].Sum(f => f.EmployeeCount);
         Console.WriteLine(count);
     }
-    // 1.c SetOps LINQ
     static void QuerySetOpsLINQ(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nLINQ SetOps: intersection Factories and Gilds by employeeCount");
@@ -155,7 +142,6 @@ class Program
         var inter = a.Intersect(b);
         Console.WriteLine(string.Join(",", inter));
     }
-    // 1.c SetOps Ext
     static void QuerySetOpsExt(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nExt SetOps: union Workshops and Gilds by employeeCount");
@@ -164,21 +150,18 @@ class Program
         var uni = a.Union(b);
         Console.WriteLine(string.Join(",", uni));
     }
-    // 1.d Aggregate LINQ
     static void QueryAggregateLINQ(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nLINQ Aggregate: avg employees across all collections");
         var all = corp.Values.SelectMany(x => x).Select(p => p.EmployeeCount);
         Console.WriteLine(all.Average());
     }
-    // 1.d Aggregate Ext
     static void QueryAggregateExt(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nExt Aggregate: max employees in any collection");
         var all = corp.Values.SelectMany(x => x).Select(p => p.EmployeeCount);
         Console.WriteLine(all.Max());
     }
-    // 1.e Group LINQ
     static void QueryGroupLINQ(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nLINQ Group: group by type");
@@ -191,7 +174,6 @@ class Program
             Console.WriteLine($"{g.Key}: {g.Count()}");
         }
     }
-    // 1.e Group Ext
     static void QueryGroupExt(Dictionary<string, List<Production>> corp)
     {
         Console.WriteLine("\nExt Group: group by employee count range");

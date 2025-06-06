@@ -6,6 +6,7 @@ namespace AerialReconConsole
 {
     class Program
     {
+        static int totalFound = 0;
         static readonly object consoleLock = new object();
 
         static void Main(string[] args)
@@ -43,7 +44,7 @@ namespace AerialReconConsole
                 Console.WriteLine();
             }
 
-            // Произвольная точка старта
+            // точка старта
             Random rand = new Random();
             int startX = rand.Next(width);
             int startY = rand.Next(height);
@@ -53,7 +54,7 @@ namespace AerialReconConsole
             List<Thread> threads = new List<Thread>();
             for (int i = 0; i < scoutCount; i++)
             {
-                int idx = i; // локальная копия для замыкания
+                int idx = i; 
                 Thread t = new Thread(() => ScoutTask(idx, width, height, map, startX, startY, scoutCount));
                 t.Priority = scoutPriorities[i];
                 threads.Add(t);
@@ -62,6 +63,7 @@ namespace AerialReconConsole
             Console.WriteLine("Запуск разведчиков...");
             threads.ForEach(t => t.Start());
             threads.ForEach(t => t.Join());
+            Console.WriteLine($"\nОбщее количество найденных целей: {totalFound}");
 
             Console.WriteLine("Разведка завершена. Нажмите любую клавишу для выхода.");
             Console.ReadKey();
@@ -118,6 +120,7 @@ namespace AerialReconConsole
                         double angle = Math.Atan2(dy, dx);
                         if (angle < 0) angle += 2 * Math.PI;
                         if (angle >= minAngle && angle < maxAngle && map[x, y])
+
                             found++;
                     }
                 }
@@ -125,11 +128,14 @@ namespace AerialReconConsole
 
             lock (consoleLock)
             {
+                totalFound += found;
                 Console.WriteLine(
                     $"Разведчик #{index + 1}: сектор {index * 360.0 / totalScouts:F1}°–{(index + 1) * 360.0 / totalScouts:F1}°, нашёл {found} целей " +
                     $"(приоритет: {Thread.CurrentThread.Priority})"
+                    $"\nОбщее количество найденных целей: {totalFound}"
                 );
             }
+
         }
     }
 }
