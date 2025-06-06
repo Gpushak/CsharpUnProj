@@ -7,80 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-
+using _10labLib;
 #pragma warning disable SYSLIB0011  // Для использования BinaryFormatter
 
 namespace Lab16App
 {
-    // Интерфейс и иерархия классов
-    public interface IInit { void RandomInit(); void Show(); }
-
-    [Serializable]
-    public class Production : IInit
-    {
-        public string Name { get; set; }
-        public int EmployeeCount { get; set; }
-        public Production() { }
-        public virtual void RandomInit()
-        {
-            var r = new Random();
-            Name = $"Production_{r.Next(1, 1000)}";
-            EmployeeCount = r.Next(1, 200);
-        }
-        public virtual void Show() => Console.WriteLine($"{GetType().Name}: {Name}, Employees={EmployeeCount}");
-    }
-
-    [Serializable]
-    public class Factory : Production
-    {
-        public int GildCount { get; set; }
-        public override void RandomInit()
-        {
-            base.RandomInit();
-            GildCount = new Random().Next(1, 20);
-        }
-        public override void Show()
-        {
-            base.Show();
-            Console.WriteLine($"  GildCount={GildCount}");
-        }
-    }
-
-    [Serializable]
-    public class Gild : Production
-    {
-        public string Supervisor { get; set; }
-        public override void RandomInit()
-        {
-            base.RandomInit();
-            Supervisor = $"Sup_{new Random().Next(1, 500)}";
-        }
-        public override void Show()
-        {
-            base.Show();
-            Console.WriteLine($"  Supervisor={Supervisor}");
-        }
-    }
-
-    [Serializable]
-    public class Workshop : Production
-    {
-        public List<string> Equipment { get; set; } = new List<string>();
-        public override void RandomInit()
-        {
-            base.RandomInit();
-            Equipment.Clear();
-            var r = new Random();
-            for (int i = 0; i < r.Next(1, 6); i++)
-                Equipment.Add($"Eq_{r.Next(1, 100)}");
-        }
-        public override void Show()
-        {
-            base.Show();
-            Console.WriteLine("  Equipment: " + string.Join(", ", Equipment));
-        }
-    }
-
     // Собственная коллекция из лаб.12
     public class DoublyLinkedList<T>
     {

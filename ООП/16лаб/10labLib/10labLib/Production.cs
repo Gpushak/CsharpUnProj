@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace _10labLib
 {
+    [Serializable]
     public class Production : IInit, IComparable<Production>, ICloneable
     {
         public string Name { get; set; }

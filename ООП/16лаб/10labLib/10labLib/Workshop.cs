@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace _10labLib
 {
+    [Serializable]
     public class Workshop : Production
     {
         public List<string> Equipment { get; set; }

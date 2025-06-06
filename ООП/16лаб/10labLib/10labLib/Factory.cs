@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace _10labLib
 {
+    [Serializable]
     public class Factory : Production
     {
         public int GildCount { get; set; }

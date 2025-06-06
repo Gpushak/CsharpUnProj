@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace _10labLib
 {
+    [Serializable]
     public class Gild : Production
     {
         public string Supervisor { get; set; }
